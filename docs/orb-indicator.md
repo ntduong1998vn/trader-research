@@ -20,7 +20,7 @@ Cùng một cú phá vùng, hai cách vào có thể cho tín hiệu khác nhau.
 2. Mở biểu đồ một cổ phiếu Mỹ, chẳng hạn AAPL. Chọn **nến thường, khung 1 phút**.
 3. Mở **Pine Editor**, tạo một indicator mới, xóa nội dung mẫu rồi dán mã đã chép.
 4. Bấm **Save**, sau đó **Add to chart**. Có thể tìm các nút này trong menu của Pine Editor.
-5. Mở cài đặt chỉ báo. Lần đầu giữ **Classic**, vùng **5 phút** và tắt lọc RVOL để kiểm tra giá trước.
+5. Mở cài đặt chỉ báo. Giữ **Classic**, vùng **5 phút**. Tắt lọc khối lượng tương đối (relative volume, RVOL) để kiểm tra giá trước.
 
 Mặc định, phiên là 09:30–16:00 theo `America/New_York`, từ thứ Hai đến thứ Sáu. Múi giờ hiển thị của biểu đồ không đổi cách tính.
 
@@ -121,7 +121,7 @@ Tắt giới hạn Classic không cho phép nhiều lệnh cùng lúc. Sau khi t
 
 ### Khi nào bật lọc khối lượng?
 
-Bật sau khi đã kiểm tra đúng vùng và entry. Khối lượng tương đối (relative volume, RVOL) so khối lượng OR hôm nay với các phiên trước.
+Bật sau khi đã kiểm tra đúng vùng và entry. RVOL so khối lượng OR hôm nay với các phiên trước.
 
 **RVOL = Khối lượng OR hôm nay ÷ Khối lượng OR trung bình của N phiên hợp lệ trước.**
 
