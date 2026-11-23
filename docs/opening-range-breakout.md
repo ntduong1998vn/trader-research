@@ -28,7 +28,7 @@ Một ví dụ trong tài liệu đầu vào dùng nến 5 hoặc 15 phút và y
 
 ### Cách 2: Đặt lệnh chờ kích hoạt tại biên (nghiên cứu [1])
 
-1. Lọc mã. Trong bản có RVOL, chia khối lượng của vùng hôm nay cho trung bình đúng khung giờ đó trong 14 phiên trước. Không lấy dữ liệu trước giờ mở cửa hoặc đưa hôm nay vào số bình quân. Chỉ lấy tối đa 20 mã có RVOL cao nhất trong nhóm đạt từ 1,0.
+1. Trước khi xếp hạng, lọc mã theo [giá mở cửa, khối lượng và biên độ dao động](#cac-con-so-ay-u-cua-nghien-cuu-1). Trong bản có RVOL, chia khối lượng của vùng hôm nay cho trung bình đúng khung giờ đó trong 14 phiên trước. Không lấy dữ liệu trước giờ mở cửa hoặc đưa hôm nay vào số bình quân. Trong các mã đủ điều kiện, chỉ lấy tối đa 20 mã có RVOL cao nhất trong nhóm đạt từ 1,0.
 2. Nhìn màu của **cả nến mở cửa trên khung đang thử**. Ví dụ, với vùng 5 phút, đó là nến 09:30–09:35, không phải nến 1 phút đầu tiên. Nến xanh: đặt lệnh mua kích hoạt tại đỉnh vùng. Nến đỏ: đặt lệnh bán kích hoạt tại đáy vùng. Giá mở bằng giá đóng (doji): không đặt lệnh.
 3. Tính dừng lỗ từ **giá khớp**. Khoảng cách bằng 10% biên độ dao động trung bình ngày (ATR), tính từ 14 phiên đã đóng. Không đặt mục tiêu chốt lời. Nếu chưa dừng lỗ, đóng vị thế cuối phiên.
 
