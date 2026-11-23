@@ -138,6 +138,8 @@ def silver_bullet():
     headline(fig, "Một lệnh short Silver Bullet diễn ra thế nào?", "Dữ liệu mô phỏng · Không phải backtest")
 
     candles = [
+        (99.80, 99.95, 99.60, 99.90),
+        (99.90, 100.10, 99.75, 100.05),
         (100.05, 100.15, 100.00, 100.10),
         (100.10, 100.42, 100.08, 100.38),
         (100.38, 100.40, 100.25, 100.30),
@@ -152,11 +154,12 @@ def silver_bullet():
         (100.12, 100.14, 99.80, 99.85),
         (99.85, 99.88, 99.60, 99.65),
     ]
+    xs = [x - 2 for x in range(len(candles))]
     swept_high, entry, target = 100.56, 100.20, 99.60
 
     ax.hlines(100.42, -0.5, 5.5, color=MUTED, lw=1.4, ls="--")
     ax.text(-0.4, 100.44, "Đỉnh gần nhất (thanh khoản)", color=MUTED, fontsize=13, va="bottom")
-    ax.hlines(99.60, 9.5, 12.6, color=MUTED, lw=1.4, ls="--")
+    ax.hlines(99.60, -2.5, 12.6, color=MUTED, lw=1.4, ls="--")
     ax.text(9.6, 99.54, "Đáy gần nhất (thanh khoản đối diện)", color=MUTED, fontsize=13, va="top")
 
     ax.add_patch(Rectangle((6.6, 100.15), 2.9, 0.10, fc=FVG_FILL, ec=PURPLE, lw=1.5, zorder=2))
@@ -169,13 +172,13 @@ def silver_bullet():
     ax.hlines(target, 11.5, 12.6, color=TEAL, lw=1.4, ls="--")
     ax.text(12.8, target, "Mục tiêu", color=TEAL, fontsize=14, va="center")
 
-    candlesticks(ax, range(13), candles)
-    label_event(ax, "1. Quét thanh khoản\n(Judas Swing)", (5, 100.56), (3.4, 100.85), RED)
+    candlesticks(ax, xs, candles)
+    label_event(ax, "1. Quét thanh khoản\n(Judas Swing)", (3, 100.56), (1.4, 100.85), RED)
     label_event(ax, "2. Displacement\nđể lại FVG", (7, 99.95), (6.2, 99.62), PURPLE)
     label_event(ax, "3. Hồi về FVG\n→ vào lệnh", (10, entry), (10.7, 100.42), BLUE)
 
-    ax.set(xlim=(-0.55, 14.6), ylim=(99.45, 101.0))
-    ax.set_xticks([0, 5, 7, 10, 12], ["09:50", "10:00", "10:15", "10:40", "10:55"])
+    ax.set(xlim=(-2.6, 14.6), ylim=(99.45, 101.0))
+    ax.set_xticks([-2, 0, 4, 8, 12], ["09:30", "09:40", "10:00", "10:20", "10:40"])
     ax.set_yticks([99.6, 100, 100.4, 100.8], ["99,6", "100,0", "100,4", "100,8"])
     ax.set_xlabel("Giờ NY · nến 5 phút", labelpad=8)
     clean_axis(ax, "y")
