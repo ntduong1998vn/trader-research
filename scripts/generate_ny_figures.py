@@ -313,7 +313,7 @@ def vwap():
     ax.text(29.8, vwap_line[-1], "VWAP", color=PURPLE, fontsize=14, va="center", fontweight="bold")
 
     label_event(ax, "Giá giữ trên VWAP\n→ theo xu hướng", (10, 100.30), (9.0, 99.94), TEAL)
-    label_event(ax, "Cắt mạnh xuống VWAP\n→ cảnh báo đảo chiều", (18, 100.32), (20.5, 100.62), RED)
+    label_event(ax, "Cắt mạnh xuống VWAP\n→ cảnh báo đảo chiều", (17, 100.32), (20.5, 100.62), RED)
 
     ax.set(xlim=(-0.7, 32.0), ylim=(99.85, 100.72))
     ax.set_xticks([0, 6, 12, 18, 24], ["09:30", "10:00", "10:30", "11:00", "11:30"])
