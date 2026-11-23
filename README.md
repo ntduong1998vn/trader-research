@@ -2,6 +2,8 @@
 
 [Wiki nghiên cứu giao dịch](https://ntduong1998vn.github.io/trader-research/) được tạo từ các tệp Markdown trong [`docs/`](docs/).
 
+Khi thêm hoặc sửa bài, làm theo [quy tắc viết tài liệu wiki](AGENTS.md).
+
 ## Xem wiki trên máy
 
 ```sh
