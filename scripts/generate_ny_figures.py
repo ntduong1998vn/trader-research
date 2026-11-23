@@ -55,7 +55,7 @@ def clean_axis(ax, grid_axis):
         spine.set_visible(False)
 
 
-def candlesticks(ax, xs, ohlc):
+def candlesticks(ax, xs, ohlc, min_body=0.003):
     for x, (open_, high, low, close) in zip(xs, ohlc, strict=True):
         color = TEAL if close >= open_ else RED
         ax.vlines(x, low, high, color=color, linewidth=1.8, zorder=3)
@@ -63,7 +63,7 @@ def candlesticks(ax, xs, ohlc):
             Rectangle(
                 (x - 0.26, min(open_, close)),
                 width=0.52,
-                height=max(abs(close - open_), 0.003),
+                height=max(abs(close - open_), min_body),
                 facecolor=color,
                 zorder=4,
             )
@@ -219,7 +219,7 @@ def range_forex():
     ax.hlines(target, 12.5, 14.5, color=TEAL, lw=1.4, ls="--")
     ax.text(14.7, target, "Mục tiêu 2R", color=TEAL, fontsize=14, va="center")
 
-    candlesticks(ax, xs, candles)
+    candlesticks(ax, xs, candles, min_body=0.00005)
     label_event(ax, "Nến 15 phút đóng\nngoài range → vào", (8, 1.0868), (7.6, 1.0910), BLUE)
 
     ax.set(xlim=(-0.7, 16.6), ylim=(1.0780, 1.0960))
@@ -393,7 +393,7 @@ def london_fix():
     ax.axvline(12, color=PURPLE, lw=1.6, ls="--", zorder=2)
     ax.text(12, 1.0874, "London Fix 11:00\n(16:00 giờ London)", color=PURPLE, fontsize=13, ha="center", va="bottom", fontweight="bold")
 
-    candlesticks(ax, xs, candles)
+    candlesticks(ax, xs, candles, min_body=0.00005)
     label_event(ax, "Dòng tiền tái cân bằng\nquanh Fix → đảo chiều", (14.5, 1.0828), (18.0, 1.0852), PURPLE)
 
     ax.set(xlim=(-0.7, 22.6), ylim=(1.0792, 1.0900))
