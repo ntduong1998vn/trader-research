@@ -6,6 +6,7 @@ Wiki này lưu các ghi chú nghiên cứu, nguồn tham khảo và cách kiểm
 
 - [Giao dịch khi giá phá vùng mở cửa (Opening Range Breakout, ORB)](opening-range-breakout.md) — hai cách vào lệnh, ví dụ trên biểu đồ và cách tự kiểm tra.
 - [Dùng chỉ báo ORB để xem điểm vào lệnh](orb-indicator.md) — thêm mã Pine vào TradingView và đối chiếu entry quá khứ.
+- [Giao dịch theo khung giờ New York và khung giờ ICT](new-york-session-ict.md) — quy đổi giờ VN, các phương pháp phiên New York, Killzone/Silver Bullet/Macro và bằng chứng backtest.
 
 ## Cách thêm trang mới
 
