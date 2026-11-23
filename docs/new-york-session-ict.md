@@ -78,9 +78,13 @@ Các bước, lấy ví dụ lệnh bán khống:
 
 *Dữ liệu mô phỏng, không phải kết quả kiểm thử. Với lệnh mua, đảo ngược chiều: giá quét qua đáy gần nhất, displacement đi lên để lại FVG, vào lệnh khi giá hồi xuống FVG.*
 
+![Chiều mua của Silver Bullet: quét đáy gần nhất, displacement đi lên để lại FVG, vào lệnh mua khi giá hồi xuống FVG](assets/ny/ny-silver-bullet-long.svg)
+
+*Dữ liệu mô phỏng, không phải kết quả kiểm thử.*
+
 ### Macro: khung 20–30 phút
 
-Macro là các cửa sổ ngắn theo giờ New York, nằm lọt trong Killzone. ICT cho rằng trong các khung này giá thường quét thanh khoản hoặc chạy về lấp FVG, rồi tăng tốc theo một hướng. ICT gọi cơ chế đó là "IPDA" (Interbank Price Delivery Algorithm).
+Macro là các cửa sổ ngắn theo giờ New York, gắn với các khung Killzone. ICT cho rằng trong các khung này giá thường quét thanh khoản hoặc chạy về lấp FVG, rồi tăng tốc theo một hướng. ICT gọi cơ chế đó là "IPDA" (Interbank Price Delivery Algorithm).
 
 **Macro chỉ cho biết lúc nào cần chú ý, không cho biết nên mua hay bán.** Hướng lệnh và điểm vào vẫn phải lấy từ xu hướng khung lớn (bias) và setup riêng của bạn.
 
@@ -102,11 +106,15 @@ Cách dùng thực tế:
 - Đánh dấu đỉnh và đáy của từng Macro. Macro sau thường được kỳ vọng sẽ quét các mức đó.
 - Dùng biểu đồ 1–5 phút, vì mỗi khung rất ngắn.
 
+![Vị trí 8 khung Macro trong ngày theo giờ New York, đối chiếu với các khung Killzone](assets/ny/ny-macro-windows.svg)
+
+*Giờ New York (dòng trên), dòng phụ là giờ Việt Nam mùa đông (NY + 12).*
+
 ### Các khung ICT lồng vào nhau như thế nào
 
 - **Killzone** là khung vài giờ, ví dụ NY AM 8:30–11:00.
 - **Silver Bullet** là khung 1 giờ nằm trong Killzone, ví dụ 10:00–11:00, và có quy tắc vào lệnh cụ thể.
-- **Macro** là khung 20–30 phút nằm lọt trong Killzone. Hai Macro 09:50–10:10 và 10:50–11:10 chồng lên đầu và cuối khung Silver Bullet NY AM (mỗi khung nhô ra 10 phút); nhiều người dùng chúng để canh thời điểm vào lệnh chính xác hơn.
+- **Macro** là khung 20–30 phút gắn với Killzone; hầu hết nằm trọn trong một Killzone, riêng Macro 10:50–11:10 nhô quá mốc 11:00 kết thúc NY AM. Hai Macro 09:50–10:10 và 10:50–11:10 chồng lên đầu và cuối khung Silver Bullet NY AM (mỗi khung nhô ra 10 phút); nhiều người dùng chúng để canh thời điểm vào lệnh chính xác hơn.
 
 ![Ba lớp khung giờ ICT trong phiên New York: Killzone NY AM chứa Silver Bullet, còn hai khung Macro chồng lên đầu và cuối Silver Bullet](assets/ny/ny-khung-gio.svg)
 
