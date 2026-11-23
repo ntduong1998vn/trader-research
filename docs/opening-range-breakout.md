@@ -28,7 +28,7 @@ Một ví dụ trong tài liệu đầu vào dùng nến 5 hoặc 15 phút và y
 
 ### Cách 2: Đặt lệnh chờ kích hoạt tại biên (nghiên cứu [1])
 
-1. Trước khi xếp hạng, lọc mã theo [giá mở cửa, khối lượng và biên độ dao động](#cac-con-so-ay-u-cua-nghien-cuu-1). Trong bản có RVOL, chia khối lượng của vùng hôm nay cho trung bình đúng khung giờ đó trong 14 phiên trước. Không lấy dữ liệu trước giờ mở cửa hoặc đưa hôm nay vào số bình quân. Trong các mã đủ điều kiện, chỉ lấy tối đa 20 mã có RVOL cao nhất trong nhóm đạt từ 1,0.
+1. Trước khi xếp hạng, lọc mã theo [giá mở cửa, khối lượng và biên độ dao động](#bo-loc-ma). Trong bản có RVOL, chia khối lượng của vùng hôm nay cho trung bình đúng khung giờ đó trong 14 phiên trước. Không lấy dữ liệu trước giờ mở cửa hoặc đưa hôm nay vào số bình quân. Trong các mã đủ điều kiện, chỉ lấy tối đa 20 mã có RVOL cao nhất trong nhóm đạt từ 1,0.
 2. Nhìn màu của **cả nến mở cửa trên khung đang thử**. Ví dụ, với vùng 5 phút, đó là nến 09:30–09:35, không phải nến 1 phút đầu tiên. Nến xanh: đặt lệnh mua kích hoạt tại đỉnh vùng. Nến đỏ: đặt lệnh bán kích hoạt tại đáy vùng. Giá mở bằng giá đóng (doji): không đặt lệnh.
 3. Đặt dừng lỗ cách **giá khớp** 10% ATR ngày, tính từ 14 phiên đã đóng. ATR là biên độ thực trung bình: ngoài đỉnh và đáy trong phiên, nó còn tính cả khoảng nhảy giá so với giá đóng cửa phiên trước. Không đặt mục tiêu chốt lời. Nếu chưa dừng lỗ, đóng vị thế cuối phiên.
 
@@ -44,7 +44,7 @@ Hai nguồn dùng các giai đoạn, tập mã và quy tắc khác nhau. Một n
 
 Với vùng 5 phút, Sharpe tăng từ 0,48 lên 2,81 khi áp dụng cách chọn mã theo RVOL [1, Bảng 1–2]. Sharpe đo lợi suất vượt mức phi rủi ro so với mức biến động của lợi suất. Chênh lệch này không chỉ do ngưỡng RVOL: nghiên cứu còn giới hạn ở 20 mã và mức độ chạm trần đòn bẩy cũng thay đổi.
 
-Giữ cách lọc RVOL mà đổi từ 5 sang 30 phút, Sharpe giảm từ 2,81 xuống 0,21 [1, Bảng 3]. Nghiên cứu chọn vùng 5 phút vì nó đứng đầu trong bốn độ dài thử trên cùng một tập dữ liệu. Kết quả chưa được [xác nhận ngoài mẫu](#cach-tinh-r-va-tieu-chi-ngoai-mau). Chưa thể kết luận vùng 5 phút sẽ luôn tốt nhất, hoặc RVOL quan trọng hơn độ dài vùng.
+Giữ cách lọc RVOL mà đổi từ 5 sang 30 phút, Sharpe giảm từ 2,81 xuống 0,21 [1, Bảng 3]. Nghiên cứu chọn vùng 5 phút vì nó đứng đầu trong bốn độ dài thử trên cùng một tập dữ liệu. Kết quả chưa được [xác nhận ngoài mẫu](#kiem-tra-ngoai-mau). Chưa thể kết luận vùng 5 phút sẽ luôn tốt nhất, hoặc RVOL quan trọng hơn độ dài vùng.
 
 ![Sharpe theo độ dài vùng và lãi lỗ trung bình theo hai nhóm RVOL](assets/orb/orb-ket-qua-zarattini.svg)
 
@@ -81,6 +81,8 @@ Trong hai ví dụ ở hình, lệnh 5 phút thắng 68,87% nhưng trung bình c
 
 ## Chi tiết để đối chiếu và triển khai
 
+<a id="bo-loc-ma"></a>
+
 ### Các con số đầy đủ của nghiên cứu [1]
 
 Mô phỏng từ 01/2016 đến 12/2023, với 25.000 USD vốn đầu kỳ và hoa hồng 0,0035 USD/cổ phiếu. Ngay cả bản không lọc RVOL vẫn loại mã có giá mở cửa không quá 5 USD, khối lượng bình quân 14 phiên dưới 1 triệu cổ phiếu/ngày hoặc ATR ngày 14 phiên không quá 0,50 USD.
@@ -111,6 +113,8 @@ Mẫu gồm 1.178.668 lượt trên 614 mã trong 311 phiên. Nguồn dùng dữ
 Vùng 30 phút có tổng lãi lỗ mô phỏng cao nhất (13.270,96 USD). Đây không phải số liệu về lợi suất danh mục. Riêng vùng 5 phút, khi đổi chốt lời/dừng lỗ từ 0,5/1 lần bề rộng sang 1/0,5 lần, tỷ lệ thắng giảm từ 68,87% còn 39,12%.
 
 Lệnh bán khống thắng thường xuyên hơn trong mẫu này. Tuy nhiên, lãi lỗ trung bình nghiêng về lệnh mua: 0,031 so với 0,011 USD/lượt ở vùng 5 phút, và 0,041 so với 0,022 USD/lượt ở vùng 15 phút. Không biết rủi ro từng lệnh thì chưa thể so hai chiều theo R.
+
+<a id="kiem-tra-ngoai-mau"></a>
 
 ### Cách tính R và tiêu chí ngoài mẫu
 
