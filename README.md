@@ -4,6 +4,11 @@
 
 Khi thêm hoặc sửa bài, làm theo [quy tắc viết tài liệu wiki](AGENTS.md).
 
+## Chỉ báo ORB cho TradingView
+
+[Mã Pine v6](pine/orb-entry-indicator.pine) đánh dấu entry lịch sử trên nến thường 1 phút, chưa phải strategy kiểm thử.
+Xem [hướng dẫn dùng và giới hạn](docs/orb-indicator.md) trước khi thêm vào biểu đồ.
+
 ## Xem wiki trên máy
 
 ```sh
