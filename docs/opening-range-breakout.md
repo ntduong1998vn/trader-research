@@ -1,6 +1,6 @@
-# Opening Range Breakout (ORB): giao dịch khi giá phá vùng mở cửa
+# Giao dịch khi giá phá vùng mở cửa (Opening Range Breakout, ORB)
 
-Opening Range Breakout (ORB) là cách giao dịch dựa vào mức cao nhất và thấp nhất trong vài phút đầu phiên. Khoảng giữa hai mức đó gọi là vùng mở cửa (OR). Ví dụ, với vùng 5 phút của cổ phiếu Mỹ, bạn đánh dấu đỉnh và đáy của năm nến 1 phút từ 09:30 đến 09:34, theo giờ New York. Đến 09:35, vùng đã hoàn tất. Lúc này mới xét mua (long) nếu giá vượt đỉnh, hoặc bán khống (short) nếu giá thủng đáy.
+Với ORB, bạn dựa vào mức cao nhất và thấp nhất trong vài phút đầu phiên. Khoảng giữa hai mức đó gọi là vùng mở cửa (OR). Ví dụ, với vùng 5 phút của cổ phiếu Mỹ, bạn đánh dấu đỉnh và đáy của năm nến 1 phút từ 09:30 đến 09:34, theo giờ New York. Đến 09:35, vùng đã hoàn tất. Lúc này mới xét mua (long) nếu giá vượt đỉnh, hoặc bán khống (short) nếu giá thủng đáy.
 
 ![Ví dụ lệnh mua: đánh dấu vùng mở cửa, giá vào, dừng lỗ, mục tiêu và điểm thoát cuối phiên](assets/orb/orb-co-che.svg)
 
