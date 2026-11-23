@@ -95,7 +95,9 @@ Paper không có mục tiêu chốt lời và luôn giới hạn một entry m�
 
 **Không tự chọn kết quả thắng/thua cho nến mơ hồ.** Chẳng hạn một nến Classic chạm cả stop và target, hoặc nến Paper vừa chạm entry vừa chạm stop.
 
-Nếu Paper vào ngay giá mở nến, thứ tự đã rõ: mở lệnh trước rồi mới xét stop. Một lệnh đã mở nhảy qua stop/target cũng lấy giá mở làm tham chiếu thoát.
+Nếu Paper vào ngay giá mở nến, thứ tự đã rõ: mở lệnh trước rồi mới xét stop. Nếu giá đóng đã vượt qua stop sau entry, cũng xác nhận được stop.
+
+Một lệnh đã mở nhảy qua stop/target lấy giá mở làm tham chiếu thoát.
 
 Sau dấu `?`, chỉ báo ngừng theo dõi lượt đó. Đây không phải kết quả giao dịch đã biết.
 

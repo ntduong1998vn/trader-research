@@ -210,16 +210,17 @@ if barstate.isconfirmed
             shortSignal := tradeDirection == -1
             drawLevels := true
             status := tradeDirection == 1 ? "Đang theo dõi lệnh mua" : "Đang theo dõi lệnh bán"
-            // OHLC cannot tell whether this stop touch preceded or followed entry.
+            // The open or a close beyond stop can establish entry-before-stop.
             if paperMode
                 bool stopOnEntryBar = tradeDirection == 1 ? low <= stopPrice : high >= stopPrice
                 bool entryAtOpen = tradeDirection == 1 ? open >= orHigh : open <= orLow
                 if stopOnEntryBar
-                    ambiguousExit := not entryAtOpen
-                    stopExit := entryAtOpen
-                    exitPrice := entryAtOpen ? stopPrice : na
+                    bool stopConfirmed = entryAtOpen or (tradeDirection == 1 ? close <= stopPrice : close >= stopPrice)
+                    ambiguousExit := not stopConfirmed
+                    stopExit := stopConfirmed
+                    exitPrice := stopConfirmed ? stopPrice : na
                     tradeDirection := 0
-                    status := ambiguousExit ? "Mơ hồ: nến entry Paper cùng chạm stop" : "Chạm stop sau entry ở giá mở"
+                    status := ambiguousExit ? "Mơ hồ: nến entry Paper cùng chạm stop" : "Chạm stop sau entry"
                 else if lastSessionBar
                     endExit := true
                     exitPrice := close
