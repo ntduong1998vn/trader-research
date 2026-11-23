@@ -35,7 +35,7 @@ Bảng dưới so sánh nhanh; từng phương pháp có mục riêng kèm hình
 | Opening Range Breakout (ORB) | Vào lệnh khi giá phá range 5–30 phút đầu sau 9:30 | Sharpe 1,06 → 0,23 khi tính trượt giá, theo [bản chạy lại độc lập trên QQQ](https://github.com/giovannibrusco/zarattini-2023-orb-qqq); xem trang [ORB](opening-range-breakout.md) |
 | Range 8:00–9:30 (Forex) | Chờ nến 15 phút đóng ngoài range rồi vào theo hướng đó | Chưa có backtest độc lập [1] |
 | Initial Balance (Market Profile) | Theo dõi giá phá ra hay quay lại range 9:30–10:30 | Gần hòa vốn trước phí trên NQ/ES [2] |
-| VWAP / Anchored VWAP | Theo xu hướng khi giá giữ trên VWAP; cắt mạnh qua thì có thể đảo chiều | Công cụ bối cảnh, không phải tín hiệu độc lập |
+| VWAP / Anchored VWAP (giá trung bình gia quyền theo khối lượng) | Theo xu hướng khi giá giữ trên VWAP; cắt mạnh qua thì có thể đảo chiều | Công cụ bối cảnh, không phải tín hiệu độc lập |
 | Trade theo tin 8:30 | Chờ giá ổn định sau tin rồi theo hướng đã chọn, không đoán trước tin | Spread giãn và trượt giá lớn |
 | London Fix (11:00 NY) | Dòng tiền tái cân bằng danh mục quanh mốc định giá WM/Reuters gây đảo chiều hoặc tăng tốc trên EURUSD/GBPUSD | Xảy ra cuối giai đoạn London và New York cùng mở cửa |
 
