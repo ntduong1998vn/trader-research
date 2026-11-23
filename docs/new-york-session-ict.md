@@ -32,7 +32,7 @@ Bảng dưới so sánh nhanh; từng phương pháp có mục riêng kèm hình
 
 | Phương pháp | Ý tưởng | Bằng chứng |
 | --- | --- | --- |
-| Opening Range Breakout (ORB) | Vào lệnh khi giá phá range 5–30 phút đầu sau 9:30 | Sharpe 1,06 → 0,23 khi tính trượt giá trên QQQ; xem trang [ORB](opening-range-breakout.md) |
+| Opening Range Breakout (ORB) | Vào lệnh khi giá phá range 5–30 phút đầu sau 9:30 | Sharpe 1,06 → 0,23 khi tính trượt giá, theo [bản chạy lại độc lập trên QQQ](https://github.com/giovannibrusco/zarattini-2023-orb-qqq); xem trang [ORB](opening-range-breakout.md) |
 | Range 8:00–9:30 (Forex) | Chờ nến 15 phút đóng ngoài range rồi vào theo hướng đó | Chưa có backtest độc lập [1] |
 | Initial Balance (Market Profile) | Theo dõi giá phá ra hay quay lại range 9:30–10:30 | Gần hòa vốn trước phí trên NQ/ES [2] |
 | VWAP / Anchored VWAP | Theo xu hướng khi giá giữ trên VWAP; cắt mạnh qua thì có thể đảo chiều | Công cụ bối cảnh, không phải tín hiệu độc lập |
