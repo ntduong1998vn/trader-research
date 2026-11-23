@@ -4,7 +4,7 @@ Wiki này lưu các ghi chú nghiên cứu, nguồn tham khảo và cách kiểm
 
 ## Tài liệu hiện có
 
-- [Opening Range Breakout (ORB): bằng chứng và cách kiểm chứng](opening-range-breakout.md) — phân tích vai trò của khối lượng tương đối, so sánh các khung mở cửa và đề xuất cách kiểm thử.
+- [Giao dịch khi giá phá vùng mở cửa (Opening Range Breakout, ORB)](opening-range-breakout.md) — hai cách vào lệnh, ví dụ trên biểu đồ và cách tự kiểm tra.
 
 ## Cách thêm trang mới
 
