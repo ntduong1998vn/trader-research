@@ -11,6 +11,15 @@ mkdocs serve
 
 Mở địa chỉ mà MkDocs in ra trong terminal.
 
+## Tạo lại hình minh họa ORB
+
+```sh
+python -m pip install matplotlib==3.10.9
+python scripts/generate_orb_figures.py
+```
+
+Script ghi các tệp SVG vào `docs/assets/orb/`. Matplotlib chỉ cần khi tạo lại hình, không cần khi build wiki.
+
 ## Xuất bản lên GitHub Pages
 
 Trong GitHub, vào **Settings → Pages → Build and deployment → Source** và chọn **GitHub Actions**. Sau khi bật, mỗi lần cập nhật nhánh `main`, workflow **Deploy wiki to GitHub Pages** sẽ kiểm tra và xuất bản lại wiki.

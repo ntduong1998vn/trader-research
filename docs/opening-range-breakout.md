@@ -10,6 +10,10 @@ Khối lượng tương đối (Relative Volume, **RVOL**) giúp phân biệt m�
 
 Vùng ngắn cho tín hiệu sớm nhưng dễ nhiễu; vùng dài cho thêm thời gian quan sát nhưng nếu cùng đóng cuối phiên, lệnh có ít thời gian hơn để đạt mục tiêu và stop theo biên có thể xa hơn. Để so sánh, lấy **1R = |giá khớp vào − stop ban đầu| × khối lượng × hệ số hợp đồng** (hệ số 1 cho cổ phiếu). Giữ mẫu số cố định; kỳ vọng ròng là trung bình `P&L sau chi phí / R` trên từng lệnh, kể cả lệnh thoát cuối phiên.
 
+![Nến 1 phút với vùng OR, giá vào long, mức dừng lỗ, mục tiêu 1R và điểm thoát cuối phiên](assets/orb/orb-co-che.svg)
+
+*Minh họa mô phỏng, không phải backtest. Giá đóng trên đỉnh vùng OR, dừng lỗ đặt ở đáy vùng. Nếu giá không chạm dừng lỗ hoặc mục tiêu +1R, lệnh được đóng cuối phiên. Mục tiêu +1R là lựa chọn minh họa, không phải quy tắc của [1].*
+
 ## Hai nguồn dữ liệu trả lời hai câu hỏi khác nhau
 
 ### 1. RVOL có giúp chọn cổ phiếu tốt hơn?
@@ -30,6 +34,10 @@ Zarattini, Barbon & Aziz [1, bảng 1–3] mô phỏng danh mục cổ phiếu M
 
 **Cách đọc:** Hình 4 [1, §3] báo cáo P&L trung bình 5 phút sau hoa hồng là **−0,02R** khi RVOL < 1 và **+0,08R** khi RVOL > 1. Chênh lệch Sharpe 0,48 → 2,81 còn gộp tác động của ngưỡng RVOL, cắt top 20 và mức độ chạm trần đòn bẩy. Ngay khi giữ tiêu chí chọn theo RVOL, đổi từ 5 sang 30 phút làm Sharpe giảm 2,81 → 0,21. Khung 5 phút đứng đầu sau khi so bốn khung **trên cùng mẫu**, không phải lựa chọn đã xác nhận ngoài mẫu.
 
+![Sharpe của bốn khung OR và COMBO; P&L 5 phút theo hai nhóm RVOL](assets/orb/orb-ket-qua-zarattini.svg)
+
+*Nguồn [1], Bảng 3 và Hình 4. Bên trái là Sharpe danh mục có lọc RVOL; bên phải là P&L mỗi lệnh ở hai nhóm RVOL, không phải phép so sánh có lọc và không lọc.*
+
 ### 2. Độ dài vùng và quy tắc thoát ảnh hưởng thế nào?
 
 ORB Setups [2] báo cáo 1.178.668 lượt giao dịch mô phỏng trên 614 mã, dùng dữ liệu nến 1 phút từ 12/2024 đến 03/2026. Tỷ lệ thắng tổng hợp gộp bốn tổ hợp chốt lời/dừng lỗ; không phải tỷ lệ thắng của một cấu hình duy nhất.
@@ -42,6 +50,10 @@ ORB Setups [2] báo cáo 1.178.668 lượt giao dịch mô phỏng trên 614 mã
 
 Với **stop bằng cả bề rộng vùng**, 15 phút đặt target bằng cả vùng đạt 46,12% và 0,044 USD/lượt (xấp xỉ **0,047R**); 5 phút đặt target bằng nửa vùng đạt 68,87% nhưng chỉ 0,018 USD/lượt (xấp xỉ **0,024R**). Đây là phép chia theo bề rộng trung bình 0,94 và 0,76 USD, giả định P&L nguồn tính trên một cổ phiếu; **không** phải trung bình P&L/R từng lệnh. Giữ nguyên khung 5 phút, đổi từ target/stop 0,5×/1× sang 1×/0,5× làm tỷ lệ thắng giảm từ 68,87% xuống 39,12%: thay quy tắc thoát có thể đổi kết luận chỉ dựa trên tỷ lệ thắng.
 
+![Tỷ lệ thắng tổng hợp của ba khung OR và P&L mỗi lệnh của hai cấu hình thoát cụ thể](assets/orb/orb-ket-qua-setups.svg)
+
+*Nguồn [2]. Bên trái gộp các quy tắc thoát; bên phải chỉ so sánh hai cấu hình cụ thể, không phải P&L trung bình của tất cả cấu hình theo từng khung.*
+
 Theo [2], short thắng thường xuyên hơn nhưng long có P&L USD trung bình cao hơn: 0,031 so với 0,011 ở 5 phút và 0,041 so với 0,022 ở 15 phút. Thiếu rủi ro từng lệnh nên không thể kết luận bên nào tốt hơn theo R. Khung 30 phút với target/stop bằng cả vùng cũng dao động từ dưới 30% đến trên 60% tỷ lệ thắng theo tháng.
 
 **Giới hạn [2]:** Đây là backtest do nhà cung cấp scanner công bố; tập 614 mã có rủi ro thiên lệch chọn mẫu và sống sót vì không rõ danh sách có theo từng thời điểm và gồm mã đã hủy niêm yết hay không. FAQ nói 30 phút thắng cao hơn 5 phút (dẫn tập 150.000+ lượt), ngược với bảng chính và không giải thích khác biệt mẫu. Trong 311 phiên, nhiều lượt dùng chung mã, ngày hoặc điểm vào; không coi hơn một triệu lượt là quan sát độc lập. Hai nguồn không mô hình hóa spread hay trượt giá theo phương pháp công bố; [2] cũng không nêu hoa hồng hay làm rõ đơn vị P&L. P&L cộng dồn ở [2] không phải lợi suất danh mục như [1].
@@ -49,6 +61,10 @@ Theo [2], short thắng thường xuyên hơn nhưng long có P&L USD trung bìn
 ## Năm biến thể: điều gì được đánh đổi?
 
 Các cơ chế sau là ví dụ thực hành [3–6], không phải năm nhánh đã được so sánh đối chứng trong [1] hoặc [2].
+
+![Hai cách vào lệnh trên cùng chuỗi nến: lệnh stop kích hoạt khi chạm biên, còn Classic bỏ qua cú quét râu](assets/orb/orb-cham-bien-vs-dong-nen.svg)
+
+*Minh họa mô phỏng, không phải backtest. Với nến OR xanh, lệnh buy stop theo [1] kích hoạt khi giá chạm đỉnh OR; khi nến OR là doji thì không đặt lệnh. Classic chỉ xét tín hiệu tại nến đóng ngoài vùng, giả sử các bộ lọc khác đã đạt.*
 
 | Biến thể | Tín hiệu vào lệnh | Lợi thế kỳ vọng và điểm yếu |
 | --- | --- | --- |
