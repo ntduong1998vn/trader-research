@@ -2001,17 +2001,17 @@ z
 " clip-path="url(#pe416369503)" style="fill: #aa3f44"/>
    </g>
    <g id="patch_19">
-    <path d="M 214.260682 97.614135
-Q 232.473063 116.326997 249.515771 133.838041
+    <path d="M 308.829906 98.056824
+Q 315.497451 116.325547 321.59002 133.018864
 " style="fill: none; stroke: #aa3f44; stroke-width: 1.5; stroke-linecap: round"/>
-    <path d="M 247.480894 127.445915
-L 249.515771 133.838041
-L 243.181144 131.630667
+    <path d="M 322.351092 126.353973
+L 321.59002 133.018864
+L 316.714751 128.411072
 " style="fill: none; stroke: #aa3f44; stroke-width: 1.5; stroke-linecap: round"/>
    </g>
    <g id="text_17">
     <!-- 1. Quét thanh khoản -->
-    <g style="fill: #aa3f44" transform="translate(108.636527 74.146249) scale(0.15 -0.15)">
+    <g style="fill: #aa3f44" transform="translate(214.79048 74.146249) scale(0.15 -0.15)">
      <defs>
       <path id="DejaVuSans-Bold-31" d="M 750 831
 L 1813 831
@@ -2326,7 +2326,7 @@ z
      <use xlink:href="#DejaVuSans-Bold-6e" transform="translate(1086.572266 0)"/>
     </g>
     <!-- (Judas Swing) -->
-    <g style="fill: #aa3f44" transform="translate(137.368558 90.942968) scale(0.15 -0.15)">
+    <g style="fill: #aa3f44" transform="translate(243.522511 90.942968) scale(0.15 -0.15)">
      <defs>
       <path id="DejaVuSans-Bold-28" d="M 2413 -844
 L 1484 -844

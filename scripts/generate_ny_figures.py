@@ -173,7 +173,7 @@ def silver_bullet():
     ax.text(12.8, target, "Mục tiêu", color=TEAL, fontsize=14, va="center")
 
     candlesticks(ax, xs, candles)
-    label_event(ax, "1. Quét thanh khoản\n(Judas Swing)", (3, 100.56), (1.4, 100.85), RED)
+    label_event(ax, "1. Quét thanh khoản\n(Judas Swing)", (5, 100.56), (4.4, 100.85), RED)
     label_event(ax, "2. Displacement\nđể lại FVG", (7, 99.95), (6.2, 99.62), PURPLE)
     label_event(ax, "3. Hồi về FVG\n→ vào lệnh", (10, entry), (10.7, 100.42), BLUE)
 
