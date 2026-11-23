@@ -18,7 +18,7 @@ python -m pip install matplotlib==3.10.9
 python scripts/generate_orb_figures.py
 ```
 
-Script ghi các tệp SVG vào `docs/assets/orb/`. Matplotlib chỉ cần khi tạo lại hình, không cần khi build wiki.
+Để tái tạo hình, dùng đúng phiên bản Matplotlib ở trên và font DejaVu Sans đi kèm. Script dùng cấu hình Matplotlib mặc định thay vì cấu hình cá nhân và ghi các tệp SVG vào `docs/assets/orb/`. Không cần Matplotlib khi build wiki.
 
 ## Xuất bản lên GitHub Pages
 

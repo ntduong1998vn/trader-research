@@ -19,6 +19,7 @@ PURPLE = "#65429b"
 GRID = "#dce4ed"
 OR_FILL = "#eaf2fc"
 
+mpl.rcdefaults()
 mpl.rcParams.update(
     {
         "font.family": "DejaVu Sans",
