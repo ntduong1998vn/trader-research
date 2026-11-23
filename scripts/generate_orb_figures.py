@@ -449,7 +449,7 @@ def trend_filter():
         (100.42, 100.50, 100.30, 100.38),
         (100.38, 100.42, 100.15, 100.20),
     ]
-    ema_down = [100.60, 100.55, 100.50, 100.46, 100.42, 100.38, 100.34, 100.30, 100.26]
+    ema_down = [100.75, 100.72, 100.68, 100.65, 100.62, 100.58, 100.55, 100.52, 100.49]
     ors = [(100.05, 100.42), (99.88, 100.35)]
 
     for ax, candles, ema, (lo, hi), title in zip(
@@ -469,7 +469,7 @@ def trend_filter():
     axes[0].set_xticklabels(["09:30", "10:30", "11:15"])
     axes[1].set_xticklabels(["09:30", "10:30", "11:30"])
     axes[0].text(0.3, 99.72, "EMA", color=PURPLE, fontsize=13, fontweight="bold")
-    axes[1].text(0.3, 100.63, "EMA", color=PURPLE, fontsize=13, fontweight="bold")
+    axes[1].text(0.3, 100.79, "EMA", color=PURPLE, fontsize=13, fontweight="bold")
     axes[0].scatter([5], [100.52], color=TEAL, s=62, zorder=6)
     label_event(axes[0], "Phá vùng cùng\nEMA → vào", (5, 100.52), (6.0, 100.85), TEAL)
     label_event(axes[1], "Phá đỉnh OR nhưng\nngược EMA → bỏ qua", (6, 100.45), (6.4, 100.80), RED)

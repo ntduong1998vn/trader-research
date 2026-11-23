@@ -1366,7 +1366,7 @@ L 725.46679 164.973832
    </g>
    <g id="text_14">
     <!-- EMA -->
-    <g style="fill: #65429b" transform="translate(466.969375 138.206555) scale(0.13 -0.13)">
+    <g style="fill: #65429b" transform="translate(466.969375 117.812439) scale(0.13 -0.13)">
      <use xlink:href="#DejaVuSans-Bold-45"/>
      <use xlink:href="#DejaVuSans-Bold-4d" transform="translate(68.310547 0)"/>
      <use xlink:href="#DejaVuSans-Bold-41" transform="translate(167.822266 0)"/>
@@ -1789,15 +1789,15 @@ z
 " clip-path="url(#pdef096b7b9)" style="fill: #aa3f44"/>
    </g>
    <g id="line2d_26">
-    <path d="M 456.898047 142.030452
-L 490.46914 148.403613
-L 524.040233 154.776774
-L 557.611325 159.875303
-L 591.182418 164.973832
-L 624.753511 170.072361
-L 658.324604 175.17089
-L 691.895697 180.269419
-L 725.46679 185.367948
+    <path d="M 456.898047 122.910968
+L 490.46914 126.734865
+L 524.040233 131.833394
+L 557.611325 135.65729
+L 591.182418 139.481187
+L 624.753511 144.579716
+L 658.324604 148.403613
+L 691.895697 152.22751
+L 725.46679 156.051406
 " clip-path="url(#pdef096b7b9)" style="fill: none; stroke: #65429b; stroke-width: 2.2; stroke-linecap: square"/>
    </g>
    <g id="patch_24">
