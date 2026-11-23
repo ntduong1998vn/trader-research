@@ -31,7 +31,7 @@ Trang này tóm tắt các cách giao dịch phổ biến quanh phiên New York 
 | Phương pháp | Cách làm | Ghi chú |
 | --- | --- | --- |
 | Opening Range Breakout (ORB) | Đánh dấu đỉnh/đáy 5–30 phút đầu sau 9:30, vào lệnh khi giá phá ra | Nghiên cứu trên QQQ báo lãi; bản chạy lại độc lập thấy lợi thế gần như mất hết khi tính trượt giá (Sharpe 1,06 → 0,23). Xem trang [ORB](opening-range-breakout.md) |
-| Range 8:00–9:30 cho Forex | Range gồm cả nến tin 8:30; chờ nến 15 phút đóng ngoài range trong 9:30–11:30, chốt 2R | Bỏ qua ngày có range quá nhỏ hoặc quá lớn so với ATR ngày (biên độ thực trung bình) [1] |
+| Range 8:00–9:30 cho Forex | Range gồm cả nến tin 8:30; chờ nến 15 phút đóng ngoài range trong 9:30–11:30, dừng lỗ ở giữa range, chốt ở 2R (lãi bằng 2 lần khoảng cách từ giá vào tới dừng lỗ) | Bỏ qua ngày có range quá nhỏ hoặc quá lớn so với ATR ngày (biên độ thực trung bình) [1] |
 | Initial Balance (Market Profile) | Lấy range giờ giao dịch đầu tiên (9:30–10:30), theo dõi giá phá ra hay quay lại | Backtest trên NQ/ES gần như hòa vốn trước phí [2] |
 | VWAP / Anchored VWAP | Giá trung bình gia quyền theo khối lượng; giá giữ trên VWAP thì theo xu hướng, cắt mạnh qua thì có thể đảo chiều | Thường dùng làm bối cảnh, không phải tín hiệu độc lập |
 | Trade theo tin 8:30 | Chờ giá ổn định sau tin rồi theo hướng đã chọn, không đoán trước tin | Spread giãn và trượt giá lớn |
@@ -106,11 +106,11 @@ Cách dùng thực tế:
 
 - **Killzone** là khung vài giờ, ví dụ NY AM 8:30–11:00.
 - **Silver Bullet** là khung 1 giờ nằm trong Killzone, ví dụ 10:00–11:00, và có quy tắc vào lệnh cụ thể.
-- **Macro** là khung 20–30 phút nằm trong cả hai. Hai Macro 09:50–10:10 và 10:50–11:10 chồng lên đầu và cuối khung Silver Bullet NY AM; nhiều người dùng chúng để canh thời điểm vào lệnh chính xác hơn.
+- **Macro** là khung 20–30 phút nằm lọt trong Killzone. Hai Macro 09:50–10:10 và 10:50–11:10 chồng lên đầu và cuối khung Silver Bullet NY AM (mỗi khung nhô ra 10 phút); nhiều người dùng chúng để canh thời điểm vào lệnh chính xác hơn.
 
-![Ba lớp khung giờ ICT trong phiên New York: Killzone NY AM chứa Silver Bullet, Silver Bullet chứa hai khung Macro](assets/ny/ny-khung-gio.svg)
+![Ba lớp khung giờ ICT trong phiên New York: Killzone NY AM chứa Silver Bullet, còn hai khung Macro chồng lên đầu và cuối Silver Bullet](assets/ny/ny-khung-gio.svg)
 
-*Giờ New York, dòng phụ là giờ Việt Nam mùa đông (NY + 12). Trình tự thường thấy: mở cửa 9:30 → Judas Swing quét stop → Macro 9:50 xác nhận đổi cấu trúc và để lại FVG → vào lệnh khi giá hồi về FVG trong Silver Bullet.*
+*Giờ New York, dòng phụ là giờ Việt Nam mùa đông (NY + 12). Trình tự thường thấy: mở cửa 9:30 → Judas Swing quét stop quanh Macro 9:50 → đầu khung Silver Bullet, một nhịp chạy mạnh để lại FVG → vào lệnh khi giá hồi về FVG.*
 
 ## Số liệu nói gì?
 
@@ -119,7 +119,7 @@ Các bài backtest độc lập tìm được **chưa cho thấy setup ICT nào 
 | Nghiên cứu | Phạm vi | Kết quả |
 | --- | --- | --- |
 | RezSync [6] | 1.461 lệnh Silver Bullet, vàng / US100 / US500, 2 năm, có tính phí | Trung bình khoảng −0,01R mỗi lệnh, tỷ lệ thắng 43%, tương đương vào lệnh ngẫu nhiên |
-| Thinridge [7] | Silver Bullet, 11 hợp đồng tương lai, 2008–2026, có tính phí, so với 5.000 lần vào lệnh ngẫu nhiên | Không thị trường nào đạt; chỉ vàng (GC) gần đạt |
+| Thinridge [7] | Silver Bullet, 11 hợp đồng tương lai, 2008–2026, có tính phí, so với 5.000 lần vào lệnh ngẫu nhiên | Không thị trường nào thắng được mốc tham chiếu ngẫu nhiên; chỉ vàng (GC) gần đạt |
 | TradingEdgeJournal [8] | ES/NQ, dữ liệu 1 phút 2010–2026 | 0/288 biến thể sweep → FVG có ý nghĩa thống kê, dù vị trí vào lệnh vẫn tốt hơn vào ngẫu nhiên một chút |
 | StatOasis [9] | SPY / QQQ / IWM / DIA, dữ liệu ngày | 31/32 thống kê kiểm định (t-stat) của các khái niệm ICT không vượt ngưỡng 2. Giá có quay về FVG, nhưng không có lợi thế về lợi nhuận sau đó |
 | SSRN (Mahadzva) [10] | 6 quy tắc ICT/SMC, EURUSD / GBPUSD / AUDUSD / USDJPY | Không thấy hiệu quả khi làm đúng như ICT dạy. Sau khi quét thanh khoản, giá thường tiếp diễn chứ không đảo chiều như sách |
@@ -147,7 +147,7 @@ Các bài backtest độc lập tìm được **chưa cho thấy setup ICT nào 
 
 - **Giờ mùa đông (EST, UTC−5):** từ Chủ nhật đầu tiên của tháng 11 (gần nhất: 1/11/2026) đến Chủ nhật thứ hai của tháng 3 (tiếp theo: 14/3/2027). Giờ VN = giờ NY + 12.
 - **Giờ mùa hè (EDT, UTC−4):** từ Chủ nhật thứ hai của tháng 3 đến Chủ nhật đầu tiên của tháng 11. Giờ VN = giờ NY + 11.
-- Anh đổi giờ vào Chủ nhật cuối của tháng 3 và tháng 10, khác ngày với Mỹ. Trong khoảng lệch lịch đó, London và New York chỉ cách nhau 4 giờ thay vì 5 giờ, nên giờ "overlap" và London Fix theo giờ VN cũng dịch đi.
+- Anh đổi giờ vào Chủ nhật cuối của tháng 3 và tháng 10, khác ngày với Mỹ. Trong khoảng lệch lịch đó, London và New York chỉ cách nhau 4 giờ thay vì 5 giờ, nên giờ "overlap" và London Fix theo giờ VN cũng dịch đi. Cụ thể, London Fix 16:00 giờ London khi đó rơi vào 12:00 New York thay vì 11:00.
 
 <a id="gio-killzone-khac-nhau"></a>
 
