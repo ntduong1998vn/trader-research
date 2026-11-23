@@ -1,0 +1,24 @@
+site_name: Wiki nghiên cứu giao dịch
+site_description: Ghi chú, nguồn dữ liệu và cách kiểm chứng các ý tưởng giao dịch.
+site_url: https://ntduong1998vn.github.io/trader-research/
+repo_url: https://github.com/ntduong1998vn/trader-research
+repo_name: trader-research
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  language: vi
+  features:
+    - content.action.edit
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Chuyển sang chế độ tối
+    - scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Chuyển sang chế độ sáng
+
+plugins:
+  - search
