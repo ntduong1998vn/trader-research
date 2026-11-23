@@ -241,9 +241,14 @@ if barstate.isconfirmed
 bool showRange = inSession and orReady and completeData
 plot(showRange ? orHigh : na, "Đỉnh OR", color.blue, 2, plot.style_linebr)
 plot(showRange ? orLow : na, "Đáy OR", color.blue, 2, plot.style_linebr)
-plot(drawLevels ? entryPrice : na, "Giá entry tham chiếu", color.gray, 1, plot.style_linebr)
-plot(drawLevels ? stopPrice : na, "Dừng lỗ", color.red, 2, plot.style_linebr)
-plot(drawLevels ? targetPrice : na, "Mục tiêu", color.green, 2, plot.style_linebr)
+// Alternate plot channels so back-to-back trades never share a line segment.
+bool oddTrade = entries % 2 == 1
+plot(drawLevels and oddTrade ? entryPrice : na, "Giá entry tham chiếu", color.gray, 1, plot.style_linebr)
+plot(drawLevels and oddTrade ? stopPrice : na, "Dừng lỗ", color.red, 2, plot.style_linebr)
+plot(drawLevels and oddTrade ? targetPrice : na, "Mục tiêu", color.green, 2, plot.style_linebr)
+plot(drawLevels and not oddTrade ? entryPrice : na, "Giá entry tham chiếu (2)", color.gray, 1, plot.style_linebr)
+plot(drawLevels and not oddTrade ? stopPrice : na, "Dừng lỗ (2)", color.red, 2, plot.style_linebr)
+plot(drawLevels and not oddTrade ? targetPrice : na, "Mục tiêu (2)", color.green, 2, plot.style_linebr)
 plot(rvol, "RVOL của OR", display = display.data_window)
 plot(sessionAtr, "ATR ngày đã đóng", display = display.data_window)
 plot(exitPrice, "Giá thoát tham chiếu", display = display.data_window)
