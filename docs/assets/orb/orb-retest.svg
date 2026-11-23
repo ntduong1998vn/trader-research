@@ -415,8 +415,8 @@ L 587.000777 194.362435
 " clip-path="url(#p20f117bc7f)" style="fill: none; stroke-dasharray: 1.3,2.145; stroke-dashoffset: 0; stroke: #2459a9; stroke-width: 1.3"/>
    </g>
    <g id="LineCollection_2">
-    <path d="M 411.877851 202.82713
-L 587.000777 202.82713
+    <path d="M 411.877851 209.175652
+L 587.000777 209.175652
 " clip-path="url(#p20f117bc7f)" style="fill: none; stroke-dasharray: 5.18,2.24; stroke-dashoffset: 0; stroke: #aa3f44; stroke-width: 1.4"/>
    </g>
    <g id="LineCollection_3">
@@ -720,7 +720,7 @@ z
    </g>
    <g id="text_10">
     <!-- Dừng lỗ -->
-    <g style="fill: #aa3f44" transform="translate(593.868343 199.697755) scale(0.12 -0.12)">
+    <g style="fill: #aa3f44" transform="translate(593.868343 206.046277) scale(0.12 -0.12)">
      <defs>
       <path id="DejaVuSans-44" d="M 1259 4147
 L 1259 519
@@ -910,7 +910,7 @@ z
      <use xlink:href="#DejaVuSans-1ed7" transform="translate(326.806641 0)"/>
     </g>
     <!-- (dưới nến thử lại) -->
-    <g style="fill: #aa3f44" transform="translate(593.868343 214.00588) scale(0.12 -0.12)">
+    <g style="fill: #aa3f44" transform="translate(593.868343 220.354402) scale(0.12 -0.12)">
      <defs>
       <path id="DejaVuSans-28" d="M 1984 4856
 Q 1566 4138 1362 3434
@@ -1723,12 +1723,12 @@ z
     </g>
    </g>
    <g id="patch_18">
-    <path d="M 282.387328 91.464939
-Q 286.832605 112.308285 290.928082 131.511466
+    <path d="M 274.03034 91.468936
+Q 265.879952 134.526614 258.041474 175.936502
 " style="fill: none; stroke: #43566f; stroke-width: 1.5; stroke-linecap: round"/>
-    <path d="M 292.610618 125.017694
-L 290.928082 131.511466
-L 286.742586 126.269174
+    <path d="M 262.105054 170.599151
+L 258.041474 175.936502
+L 256.209741 169.483227
 " style="fill: none; stroke: #43566f; stroke-width: 1.5; stroke-linecap: round"/>
    </g>
    <g id="text_13">

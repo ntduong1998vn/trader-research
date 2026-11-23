@@ -397,13 +397,13 @@ def retest():
         (100.80, 100.92, 100.75, 100.88),
     ]
     xs = list(range(len(candles)))
-    or_hi, retest_low, entry, target = 100.40, 100.36, 100.55, 100.74
+    or_hi, retest_low, stop, entry, target = 100.40, 100.36, 100.33, 100.55, 100.74
 
     ax.add_patch(Rectangle((-0.46, 100.00), 4.92, or_hi - 100.00, fc=OR_FILL, ec=BLUE, lw=1.5))
     ax.text(1.95, 99.90, "Vùng OR 5 phút", color=BLUE, fontweight="bold", ha="center", va="top")
     ax.hlines(or_hi, 4.5, 14.6, color=BLUE, lw=1.3, ls=":")
-    ax.hlines(retest_low, 9.5, 14.6, color=RED, lw=1.4, ls="--")
-    ax.text(14.8, retest_low, "Dừng lỗ\n(dưới nến thử lại)", color=RED, fontsize=12, va="center")
+    ax.hlines(stop, 9.5, 14.6, color=RED, lw=1.4, ls="--")
+    ax.text(14.8, stop, "Dừng lỗ\n(dưới nến thử lại)", color=RED, fontsize=12, va="center")
     ax.hlines(entry, 10.5, 14.6, color=BLUE, lw=1.4, ls="--")
     ax.text(14.8, entry, "Vào lệnh", color=BLUE, fontsize=14, va="center")
     ax.hlines(target, 11.5, 14.6, color=TEAL, lw=1.4, ls="--")
@@ -411,7 +411,7 @@ def retest():
 
     candlesticks(ax, xs, candles)
     ax.scatter([10], [entry], color=BLUE, s=62, zorder=5)
-    label_event(ax, "Phá vùng:\nchưa vào, chờ thử lại", (6, 100.68), (5.6, 100.92), MUTED)
+    label_event(ax, "Phá vùng:\nchưa vào, chờ thử lại", (5, 100.47), (5.6, 100.92), MUTED)
     label_event(ax, "Giá thử lại\nđỉnh OR", (9, retest_low), (8.9, 100.06), PURPLE)
     label_event(ax, "Nến xác nhận\n→ vào lệnh", (10, entry), (11.9, 100.20), BLUE)
 
