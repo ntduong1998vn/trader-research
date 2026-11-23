@@ -44,7 +44,7 @@ Hai nguồn dùng các giai đoạn, tập mã và quy tắc khác nhau. Một n
 
 Với vùng 5 phút, Sharpe tăng từ 0,48 lên 2,81 khi áp dụng cách chọn mã theo RVOL [1, Bảng 1–2]. Sharpe đo lợi suất vượt mức phi rủi ro so với mức biến động của lợi suất. Chênh lệch này không chỉ do ngưỡng RVOL: nghiên cứu còn giới hạn ở 20 mã và mức độ chạm trần đòn bẩy cũng thay đổi.
 
-Giữ cách lọc RVOL mà đổi từ 5 sang 30 phút, Sharpe giảm từ 2,81 xuống 0,21 [1, Bảng 3]. Nghiên cứu chọn vùng 5 phút vì nó đứng đầu trong bốn độ dài thử trên cùng một tập dữ liệu. Kết quả chưa được [xác nhận ngoài mẫu](#kiem-tra-ngoai-mau). Chưa thể kết luận vùng 5 phút sẽ luôn tốt nhất, hoặc RVOL quan trọng hơn độ dài vùng.
+Giữ cách lọc RVOL mà đổi từ 5 sang 30 phút, Sharpe giảm từ 2,81 xuống 0,21 [1, Bảng 3]. Nghiên cứu chọn vùng 5 phút vì nó đứng đầu trong bốn độ dài thử trên cùng một tập dữ liệu. Kết quả chưa được [xác nhận ngoài mẫu](#kiem-tra-ngoai-mau), tức là kiểm tra lại trên dữ liệu chưa dùng để chọn cấu hình. Chưa thể kết luận vùng 5 phút sẽ luôn tốt nhất, hoặc RVOL quan trọng hơn độ dài vùng.
 
 ![Sharpe theo độ dài vùng và lãi lỗ trung bình theo hai nhóm RVOL](assets/orb/orb-ket-qua-zarattini.svg)
 
