@@ -1,6 +1,9 @@
 //@version=6
 indicator("ORB — Điểm vào lệnh để đối chiếu", overlay = true, max_boxes_count = 100)
 
+// The offset is required: lookahead_on must never expose today's final daily ATR.
+float closedDailyAtr = request.security(ticker.standard(syminfo.tickerid), "1D", ta.atr(14)[1], gaps = barmerge.gaps_off, lookahead = barmerge.lookahead_on)
+
 string entryMode = input.string("Classic", "Cách vào", options = ["Classic", "Paper"], group = "Tín hiệu")
 int orMinutes = input.int(5, "Số phút đầu phiên", options = [5, 15, 30, 60], group = "Tín hiệu")
 string side = input.string("Cả hai", "Chiều cho phép", options = ["Cả hai", "Chỉ mua", "Chỉ bán"], group = "Tín hiệu")
@@ -42,9 +45,6 @@ int sessionEnd = timestamp(sessionZone, localYear, localMonth, anchorDay + (over
 int orEnd = sessionStart + orMinutes * 60000
 bool inSession = not na(time(timeframe.period, tradingHours + ":" + tradingDays, sessionZone))
 bool paperMode = entryMode == "Paper"
-
-// The offset is required: lookahead_on must never expose today's final daily ATR.
-float closedDailyAtr = request.security(ticker.standard(syminfo.tickerid), "1D", ta.atr(14)[1], gaps = barmerge.gaps_off, lookahead = barmerge.lookahead_on)
 
 var int activeSession = na
 var int lastBarClose = na
