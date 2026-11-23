@@ -1,0 +1,284 @@
+//@version=6
+indicator("ORB — Điểm vào lệnh để đối chiếu", overlay = true, max_boxes_count = 100)
+
+// The offset is required: lookahead_on must never expose today's final daily ATR.
+float closedDailyAtr = request.security(ticker.standard(syminfo.tickerid), "1D", ta.atr(14)[1], gaps = barmerge.gaps_off, lookahead = barmerge.lookahead_on)
+
+string entryMode = input.string("Classic", "Cách vào", options = ["Classic", "Paper"], group = "Tín hiệu")
+int orMinutes = input.int(5, "Số phút đầu phiên", options = [5, 15, 30, 60], group = "Tín hiệu")
+string side = input.string("Cả hai", "Chiều cho phép", options = ["Cả hai", "Chỉ mua", "Chỉ bán"], group = "Tín hiệu")
+bool oneEntry = input.bool(true, "Classic: tối đa 1 entry / phiên", group = "Tín hiệu")
+
+string tradingHours = input.session("0930-1600", "Phiên liên tục", group = "Phiên")
+string tradingDays = input.string("23456", "Ngày: 1=CN, 2=T2, ..., 7=T7", group = "Phiên")
+string sessionZone = input.string("America/New_York", "Múi giờ IANA", group = "Phiên")
+
+bool useRvol = input.bool(false, "Bật lọc RVOL", group = "Khối lượng")
+int rvolLength = input.int(14, "Số phiên OR trước", minval = 1, maxval = 100, group = "Khối lượng")
+float minRvol = input.float(1.0, "RVOL tối thiểu", minval = 0.0, step = 0.1, group = "Khối lượng")
+
+string classicStop = input.string("Biên đối diện", "Classic: dừng lỗ", options = ["Biên đối diện", "10% ATR ngày"], group = "Mức giá")
+bool useTarget = input.bool(true, "Classic: vẽ mục tiêu", group = "Mức giá")
+float targetR = input.float(1.0, "Classic: mục tiêu theo R", minval = 0.1, step = 0.1, group = "Mức giá")
+int boxHistory = input.int(40, "Số hộp OR giữ lại", minval = 1, maxval = 90, group = "Hiển thị")
+
+if barstate.isfirst
+    if not chart.is_standard
+        runtime.error("Loại biểu đồ không hỗ trợ. Chọn Nến (Candles), không dùng Heikin Ashi, Renko hoặc biểu đồ phi chuẩn khác.")
+    if not timeframe.isminutes or timeframe.multiplier != 1
+        runtime.error("Khung biểu đồ hiện tại: " + timeframe.period + ". Chọn 1 phút (1m) trên thanh công cụ TradingView.")
+    if str.length(tradingDays) == 0 or str.match(tradingDays, "^[1-7]+$") != tradingDays
+        runtime.error("Ngày giao dịch chỉ gồm các chữ số 1 đến 7.")
+    if str.length(tradingHours) != 9
+        runtime.error("Chỉ hỗ trợ một phiên liên tục, ví dụ 0930-1600.")
+
+int startHour = int(str.tonumber(str.substring(tradingHours, 0, 2)))
+int startMinute = int(str.tonumber(str.substring(tradingHours, 2, 4)))
+int endHour = int(str.tonumber(str.substring(tradingHours, 5, 7)))
+int endMinute = int(str.tonumber(str.substring(tradingHours, 7, 9)))
+int localYear = year(time, sessionZone)
+int localMonth = month(time, sessionZone)
+int localDay = dayofmonth(time, sessionZone)
+int todayStart = timestamp(sessionZone, localYear, localMonth, localDay, startHour, startMinute)
+int anchorDay = localDay - (time < todayStart ? 1 : 0)
+int sessionStart = timestamp(sessionZone, localYear, localMonth, anchorDay, startHour, startMinute)
+bool overnight = endHour * 60 + endMinute <= startHour * 60 + startMinute
+int sessionEnd = timestamp(sessionZone, localYear, localMonth, anchorDay + (overnight ? 1 : 0), endHour, endMinute)
+int orEnd = sessionStart + orMinutes * 60000
+bool inSession = not na(time(timeframe.period, tradingHours + ":" + tradingDays, sessionZone))
+bool paperMode = entryMode == "Paper"
+
+var int activeSession = na
+var int lastBarClose = na
+var bool completeData = false
+var int orBars = 0
+var float orHigh = na
+var float orLow = na
+var float orOpen = na
+var float orClose = na
+var float orVolume = 0.0
+var bool volumeKnown = false
+var bool orReady = false
+var float sessionAtr = na
+var float rvol = na
+var int rvolSamples = 0
+var array<float> priorVolumes = array.new<float>()
+var box currentBox = na
+var array<box> orBoxes = array.new<box>()
+var int entries = 0
+var int tradeDirection = 0
+var float entryPrice = na
+var float stopPrice = na
+var float targetPrice = na
+var string status = "Chờ đúng giờ mở phiên"
+
+bool longSignal = false
+bool shortSignal = false
+bool stopExit = false
+bool targetExit = false
+bool endExit = false
+bool ambiguousExit = false
+bool missingExit = false
+bool drawLevels = false
+float exitPrice = na
+
+if barstate.isconfirmed
+    bool newSession = inSession and (na(activeSession) or activeSession != sessionStart)
+    if tradeDirection != 0 and (not inSession or newSession)
+        missingExit := true
+        tradeDirection := 0
+        status := "Thiếu nến cuối phiên: không suy đoán giá thoát"
+
+    if newSession
+        activeSession := sessionStart
+        lastBarClose := na
+        completeData := time == sessionStart and orEnd < sessionEnd
+        orBars := 0
+        orHigh := na
+        orLow := na
+        orOpen := open
+        orClose := na
+        orVolume := 0.0
+        volumeKnown := true
+        orReady := false
+        sessionAtr := closedDailyAtr
+        rvol := na
+        rvolSamples := array.size(priorVolumes)
+        entries := 0
+        entryPrice := na
+        stopPrice := na
+        targetPrice := na
+        currentBox := na
+        status := completeData ? "Đang tạo vùng OR" : "Bỏ phiên: thiếu đầu phiên / OR dài hơn phiên"
+        if completeData
+            currentBox := box.new(left = time, top = high, right = time_close, bottom = low, xloc = xloc.bar_time, border_color = color.blue, bgcolor = color.new(color.blue, 90))
+            array.push(orBoxes, currentBox)
+            if array.size(orBoxes) > boxHistory
+                box.delete(array.shift(orBoxes))
+
+    if inSession
+        if not na(lastBarClose) and time != lastBarClose
+            completeData := false
+            status := "Thiếu nến 1 phút: dừng theo dõi phiên này"
+            if not na(currentBox)
+                box.set_border_color(currentBox, color.gray)
+                box.set_bgcolor(currentBox, color.new(color.gray, 95))
+            if tradeDirection != 0
+                missingExit := true
+                tradeDirection := 0
+
+        bool inOpeningRange = time >= sessionStart and time < orEnd
+        if completeData and inOpeningRange
+            orHigh := na(orHigh) ? high : math.max(orHigh, high)
+            orLow := na(orLow) ? low : math.min(orLow, low)
+            orClose := close
+            orVolume += nz(volume)
+            volumeKnown := volumeKnown and not na(volume)
+            orBars += 1
+            if not na(currentBox)
+                box.set_top(currentBox, orHigh)
+                box.set_bottom(currentBox, orLow)
+                box.set_right(currentBox, time_close)
+            if time_close == orEnd and orBars == orMinutes
+                orReady := orHigh > orLow
+                rvolSamples := array.size(priorVolumes)
+                if volumeKnown and orVolume > 0
+                    if rvolSamples == rvolLength
+                        rvol := orVolume / array.avg(priorVolumes)
+                    array.push(priorVolumes, orVolume)
+                    if array.size(priorVolumes) > rvolLength
+                        array.shift(priorVolumes)
+                status := orReady ? "Chờ phá vùng" : "Bỏ phiên: OR không có bề rộng"
+
+        bool lastSessionBar = time_close == sessionEnd
+        bool exitedThisBar = false
+        if completeData and tradeDirection != 0
+            drawLevels := true
+            bool stopHit = tradeDirection == 1 ? low <= stopPrice : high >= stopPrice
+            bool targetHit = not na(targetPrice) and (tradeDirection == 1 ? high >= targetPrice : low <= targetPrice)
+            // An opening gap is ordered before the remaining intrabar high/low.
+            bool gapStop = tradeDirection == 1 ? open <= stopPrice : open >= stopPrice
+            bool gapTarget = not na(targetPrice) and (tradeDirection == 1 ? open >= targetPrice : open <= targetPrice)
+            if gapStop
+                stopExit := true
+                exitPrice := open
+            else if gapTarget
+                targetExit := true
+                exitPrice := open
+            else if stopHit and targetHit
+                ambiguousExit := true
+            else if stopHit
+                stopExit := true
+                exitPrice := stopPrice
+            else if targetHit
+                targetExit := true
+                exitPrice := targetPrice
+            else if lastSessionBar
+                endExit := true
+                exitPrice := close
+            exitedThisBar := stopExit or targetExit or endExit or ambiguousExit
+            if exitedThisBar
+                tradeDirection := 0
+                status := ambiguousExit ? "Mơ hồ: cùng nến chạm stop và target" : "Đã kết thúc theo dõi lệnh"
+
+        bool volumePass = not useRvol or (not na(rvol) and rvol >= minRvol)
+        bool atrRequired = paperMode or classicStop == "10% ATR ngày"
+        bool atrPass = not atrRequired or (not na(sessionAtr) and sessionAtr > 0)
+        bool entryAllowed = completeData and orReady and time >= orEnd and (paperMode or not lastSessionBar) and volumePass and atrPass and tradeDirection == 0 and not exitedThisBar and (entries == 0 or (not paperMode and not oneEntry))
+        int signalSide = 0
+        if entryAllowed
+            bool allowLong = side != "Chỉ bán"
+            bool allowShort = side != "Chỉ mua"
+            if paperMode
+                if allowLong and orClose > orOpen and high >= orHigh
+                    signalSide := 1
+                else if allowShort and orClose < orOpen and low <= orLow
+                    signalSide := -1
+            else
+                if allowLong and close > orHigh and close[1] <= orHigh
+                    signalSide := 1
+                else if allowShort and close < orLow and close[1] >= orLow
+                    signalSide := -1
+
+        if signalSide != 0
+            tradeDirection := signalSide
+            entries += 1
+            entryPrice := paperMode ? (tradeDirection == 1 ? math.max(open, orHigh) : math.min(open, orLow)) : close
+            float atrDistance = math.max(syminfo.mintick, math.round_to_mintick(0.1 * sessionAtr))
+            stopPrice := atrRequired ? math.round_to_mintick(entryPrice - tradeDirection * atrDistance) : (tradeDirection == 1 ? orLow : orHigh)
+            float risk = math.abs(entryPrice - stopPrice)
+            targetPrice := not paperMode and useTarget ? math.round_to_mintick(entryPrice + tradeDirection * math.max(syminfo.mintick, risk * targetR)) : na
+            longSignal := tradeDirection == 1
+            shortSignal := tradeDirection == -1
+            drawLevels := true
+            status := tradeDirection == 1 ? "Đang theo dõi lệnh mua" : "Đang theo dõi lệnh bán"
+            // The open or a close beyond stop can establish entry-before-stop.
+            if paperMode
+                bool stopOnEntryBar = tradeDirection == 1 ? low <= stopPrice : high >= stopPrice
+                bool entryAtOpen = tradeDirection == 1 ? open >= orHigh : open <= orLow
+                if stopOnEntryBar
+                    bool stopConfirmed = entryAtOpen or (tradeDirection == 1 ? close <= stopPrice : close >= stopPrice)
+                    ambiguousExit := not stopConfirmed
+                    stopExit := stopConfirmed
+                    exitPrice := stopConfirmed ? stopPrice : na
+                    tradeDirection := 0
+                    status := ambiguousExit ? "Mơ hồ: nến entry Paper cùng chạm stop" : "Chạm stop sau entry"
+                else if lastSessionBar
+                    endExit := true
+                    exitPrice := close
+                    tradeDirection := 0
+                    status := "Entry Paper và đóng cuối phiên cùng nến"
+
+        if completeData and orReady and entries == 0
+            if paperMode and orClose == orOpen
+                status := "Doji của cả vùng OR: bỏ phiên"
+            else if not volumePass
+                status := na(rvol) ? "RVOL: thiếu volume / chưa đủ phiên trước" : "RVOL dưới ngưỡng"
+            else if not atrPass
+                status := "Chưa đủ ATR ngày đã đóng"
+            else if lastSessionBar
+                status := "Hết phiên: không có entry"
+        lastBarClose := time_close
+
+bool showRange = inSession and orReady and completeData
+plot(showRange ? orHigh : na, "Đỉnh OR", color.blue, 2, plot.style_linebr)
+plot(showRange ? orLow : na, "Đáy OR", color.blue, 2, plot.style_linebr)
+// Alternate plot channels so back-to-back trades never share a line segment.
+bool oddTrade = entries % 2 == 1
+plot(drawLevels and oddTrade ? entryPrice : na, "Giá entry tham chiếu", color.gray, 1, plot.style_linebr)
+plot(drawLevels and oddTrade ? stopPrice : na, "Dừng lỗ", color.red, 2, plot.style_linebr)
+plot(drawLevels and oddTrade ? targetPrice : na, "Mục tiêu", color.green, 2, plot.style_linebr)
+plot(drawLevels and not oddTrade ? entryPrice : na, "Giá entry tham chiếu (2)", color.gray, 1, plot.style_linebr)
+plot(drawLevels and not oddTrade ? stopPrice : na, "Dừng lỗ (2)", color.red, 2, plot.style_linebr)
+plot(drawLevels and not oddTrade ? targetPrice : na, "Mục tiêu (2)", color.green, 2, plot.style_linebr)
+plot(rvol, "RVOL của OR", display = display.data_window)
+plot(sessionAtr, "ATR ngày đã đóng", display = display.data_window)
+plot(exitPrice, "Giá thoát tham chiếu", display = display.data_window)
+
+plotshape(longSignal, "Entry mua", shape.triangleup, location.belowbar, color.lime, text = "L", size = size.small)
+plotshape(shortSignal, "Entry bán", shape.triangledown, location.abovebar, color.red, text = "S", size = size.small)
+plotshape(stopExit, "Chạm stop", shape.xcross, location.abovebar, color.red, text = "SL", size = size.tiny)
+plotshape(targetExit, "Chạm target", shape.circle, location.abovebar, color.green, text = "TP", size = size.tiny)
+plotshape(endExit, "Đóng cuối phiên", shape.square, location.abovebar, color.blue, text = "EOD", size = size.tiny)
+plotshape(ambiguousExit, "Không rõ thứ tự trong nến", shape.diamond, location.abovebar, color.orange, text = "?", size = size.tiny)
+plotshape(missingExit, "Thiếu dữ liệu khi đang theo dõi", shape.diamond, location.abovebar, color.gray, text = "DATA", size = size.tiny)
+
+alertcondition(longSignal, "ORB mua", "ORB mua — {{ticker}} {{interval}}. Xem giá tham chiếu trên chart; không phải thông báo khớp lệnh.")
+alertcondition(shortSignal, "ORB bán", "ORB bán — {{ticker}} {{interval}}. Xem giá tham chiếu trên chart; không phải thông báo khớp lệnh.")
+
+var table info = table.new(position.top_right, 2, 7, bgcolor = color.new(color.black, 15), frame_color = color.gray, frame_width = 1)
+if barstate.islast
+    table.cell(info, 0, 0, "ORB / 1 phút", text_color = color.white)
+    table.cell(info, 1, 0, entryMode, text_color = color.white)
+    table.cell(info, 0, 1, "Phiên", text_color = color.white)
+    table.cell(info, 1, 1, tradingHours + " / " + sessionZone, text_color = color.white)
+    table.cell(info, 0, 2, "OR " + str.tostring(orMinutes) + " phút", text_color = color.white)
+    table.cell(info, 1, 2, str.tostring(orLow, format.mintick) + " - " + str.tostring(orHigh, format.mintick), text_color = color.white)
+    table.cell(info, 0, 3, "RVOL / mẫu trước", text_color = color.white)
+    table.cell(info, 1, 3, str.tostring(rvol, "#.##") + " / " + str.tostring(rvolSamples), text_color = color.white)
+    table.cell(info, 0, 4, "ATR ngày trước", text_color = color.white)
+    table.cell(info, 1, 4, str.tostring(sessionAtr, format.mintick), text_color = color.white)
+    table.cell(info, 0, 5, "Entry phiên này", text_color = color.white)
+    table.cell(info, 1, 5, str.tostring(entries), text_color = color.white)
+    table.cell(info, 0, 6, "Trạng thái", text_color = color.white)
+    table.cell(info, 1, 6, status, text_color = color.white)
