@@ -351,13 +351,13 @@ test('An unconfirmed final candle does not create an entry', async () => {
   assert.deepEqual(events(await run(bars), 'Entry mua'), []);
 });
 
-for (const [options, inputs] of [
-  [{ timeframe: '5' }, {}],
-  [{ ticker: 'TEST:ORB;heikinashi' }, {}],
-  [{}, { 'Ngày: 1=CN, 2=T2, ..., 7=T7': '0' }],
-  [{}, { 'Ngày: 1=CN, 2=T2, ..., 7=T7': '' }],
+for (const [options, inputs, error] of [
+  [{ timeframe: '5' }, {}, /Khung biểu đồ hiện tại: 5\. Chọn 1 phút/],
+  [{ ticker: 'TEST:ORB;heikinashi' }, {}, /Loại biểu đồ không hỗ trợ.*Candles/],
+  [{}, { 'Ngày: 1=CN, 2=T2, ..., 7=T7': '0' }, /Ngày giao dịch/],
+  [{}, { 'Ngày: 1=CN, 2=T2, ..., 7=T7': '' }, /Ngày giao dịch/],
 ]) {
   test(`Rejects unsupported chart/session input ${JSON.stringify({ options, inputs })}`, async () => {
-    await assert.rejects(run(session(), inputs, options), /Chỉ dùng|Ngày giao dịch/);
+    await assert.rejects(run(session(), inputs, options), error);
   });
 }

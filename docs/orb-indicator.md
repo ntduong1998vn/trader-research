@@ -24,7 +24,7 @@ Cùng một cú phá vùng, hai cách vào có thể cho tín hiệu khác nhau.
 
 Mặc định, phiên là 09:30–16:00 theo `America/New_York`, từ thứ Hai đến thứ Sáu. Múi giờ hiển thị của biểu đồ không đổi cách tính.
 
-**Bản đầu chỉ hỗ trợ nến thường 1 phút.** Khung khác hoặc nến Heikin Ashi/Renko sẽ báo lỗi và ngừng chạy.
+**Nếu lỗi ngay khi thêm chỉ báo:** trên thanh công cụ TradingView, chọn loại **Nến (Candles)** và khung **1 phút (1m)**. Không chọn Heikin Ashi hoặc Renko. Vùng mở cửa **5 phút** là cài đặt của chỉ báo, không phải khung biểu đồ.
 
 ## Mỗi phiên chỉ báo làm gì?
 

@@ -23,8 +23,10 @@ float targetR = input.float(1.0, "Classic: mục tiêu theo R", minval = 0.1, st
 int boxHistory = input.int(40, "Số hộp OR giữ lại", minval = 1, maxval = 90, group = "Hiển thị")
 
 if barstate.isfirst
-    if not chart.is_standard or not timeframe.isminutes or timeframe.multiplier != 1
-        runtime.error("Chỉ dùng nến thời gian chuẩn 1 phút. Không dùng Heikin Ashi / Renko.")
+    if not chart.is_standard
+        runtime.error("Loại biểu đồ không hỗ trợ. Chọn Nến (Candles), không dùng Heikin Ashi, Renko hoặc biểu đồ phi chuẩn khác.")
+    if not timeframe.isminutes or timeframe.multiplier != 1
+        runtime.error("Khung biểu đồ hiện tại: " + timeframe.period + ". Chọn 1 phút (1m) trên thanh công cụ TradingView.")
     if str.length(tradingDays) == 0 or str.match(tradingDays, "^[1-7]+$") != tradingDays
         runtime.error("Ngày giao dịch chỉ gồm các chữ số 1 đến 7.")
     if str.length(tradingHours) != 9
