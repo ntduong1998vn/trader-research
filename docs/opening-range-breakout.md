@@ -159,13 +159,13 @@ Lệnh bán khống thắng thường xuyên hơn trong mẫu này. Tuy nhiên, 
 
   ![Khoảng trống qua đêm lớn hơn ATR và cú phá vùng cùng hướng khoảng trống](assets/orb/orb-gap-and-go.svg)
 
-  *Dữ liệu mô phỏng, không phải kết quả kiểm thử. Nét chấm là giá đóng cửa hôm trước. Mũi tên tím là khoảng trống qua đêm lớn hơn ATR. Chỉ xét lệnh phá vùng cùng hướng khoảng trống.*
+  *Dữ liệu mô phỏng, không phải kết quả kiểm thử. Nét chấm là giá đóng cửa hôm trước. Mũi tên tím là khoảng trống qua đêm 1,1 USD, lớn hơn ATR giả định 0,8 USD. Chỉ xét lệnh phá vùng cùng hướng khoảng trống.*
 
 - **Phá vỡ thất bại (Failed ORB).** Nếu nến đóng trở lại trong vùng, thoát lệnh thuận phá vỡ nếu có. Nếu muốn thử vào ngược hướng về biên kia, coi đó là tín hiệu riêng: giá vẫn có thể quay lại hướng phá vỡ ban đầu [6].
 
   ![Lệnh mua khi nến đóng ngoài đỉnh rồi thoát khi nến đóng trở lại trong vùng](assets/orb/orb-pha-vo-that-bai.svg)
 
-  *Dữ liệu mô phỏng, không phải kết quả kiểm thử. Lệnh mua vào khi nến đóng trên đỉnh. Nến đóng lại trong vùng là điểm thoát. Đáy vùng chỉ là tín hiệu riêng cho chiều ngược.*
+  *Dữ liệu mô phỏng, không phải kết quả kiểm thử. Lệnh mua vào khi nến đóng trên đỉnh. Nến đóng lại trong vùng là điểm thoát. Nếu vào chiều ngược, đáy vùng là đích chứ không phải tín hiệu.*
 
 ### Thử trên thị trường khác
 
