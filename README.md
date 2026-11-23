@@ -9,6 +9,19 @@ Khi thêm hoặc sửa bài, làm theo [quy tắc viết tài liệu wiki](AGENT
 [Mã Pine v6](pine/orb-entry-indicator.pine) đánh dấu entry lịch sử trên nến thường 1 phút, chưa phải strategy kiểm thử.
 Xem [hướng dẫn dùng và giới hạn](docs/orb-indicator.md) trước khi thêm vào biểu đồ.
 
+### Kiểm thử logic Pine ngoài TradingView
+
+Dùng Node.js 24:
+
+```sh
+npm ci --ignore-scripts
+npm test
+```
+
+Các ca kiểm thử chạy trực tiếp mã `.pine` bằng PineTS 0.13.1 trên dữ liệu nến mô phỏng, không gọi dữ liệu thị trường bên ngoài.
+Chúng kiểm tra vùng OR, entry, RVOL, ATR ngày đã đóng, phiên qua đêm, thiếu nến và các trường hợp mơ hồ.
+PineTS là công cụ bên thứ ba, không phải bộ biên dịch của TradingView. Vẫn cần kiểm tra trong Pine Editor và trên biểu đồ thật.
+
 ## Xem wiki trên máy
 
 ```sh

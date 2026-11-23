@@ -164,7 +164,7 @@ ATR vẫn lấy từ nến ngày của mã, không tính lại thành một ngà
 
 Cảnh báo TradingView chỉ gửi cho tín hiệu mới khi chạy trực tiếp, không gửi lại entry quá khứ. Bar Replay không xác nhận việc giao cảnh báo thật.
 
-**Tình trạng kiểm chứng:** cần biên dịch trong Pine Editor và đối chiếu trên TradingView trước khi dùng. Kiểm thử ngoài TradingView không thay thế bước này.
+**Tình trạng kiểm chứng:** mã đã qua kiểm thử logic trên nến mô phỏng bằng PineTS, một công cụ bên thứ ba. Vẫn cần biên dịch trong Pine Editor và đối chiếu trên TradingView trước khi dùng.
 
 ## Nguồn và phần kỹ thuật
 
