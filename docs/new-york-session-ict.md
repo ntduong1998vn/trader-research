@@ -165,7 +165,7 @@ Cách dùng thực tế:
 
 - **Killzone** là khung vài giờ, ví dụ NY AM 8:30–11:00.
 - **Silver Bullet** là khung 1 giờ nằm trong Killzone, ví dụ 10:00–11:00, và có quy tắc vào lệnh cụ thể.
-- **Macro** là khung 20–30 phút gắn với Killzone; hầu hết nằm trọn trong một Killzone, còn ba khung nhô qua mép: 10:50–11:10 qua mốc 11:00 kết thúc NY AM (nhưng vẫn nằm trong London Close), 11:50–12:10 qua mốc 12:00 kết thúc London Close, và 13:10–13:40 bắt đầu trước 13:30 khi NY PM mở. Hai Macro 09:50–10:10 và 10:50–11:10 chồng lên đầu và cuối khung Silver Bullet NY AM (mỗi khung nhô ra 10 phút); nhiều người dùng chúng để canh thời điểm vào lệnh chính xác hơn.
+- **Macro** là khung 20–30 phút gắn với Killzone. Sáu khung nằm trọn trong một Killzone. Hai khung nhô ra ngoài là 11:50–12:10 (qua mốc 12:00 kết thúc London Close) và 13:10–13:40 (bắt đầu trước 13:30 mở NY PM). Hai Macro 09:50–10:10 và 10:50–11:10 chồng lên đầu và cuối khung Silver Bullet NY AM, mỗi khung nhô ra 10 phút, nên cũng cắt mép của Killzone kề tại 10:00 và 11:00 dù vẫn nằm trọn trong một khung lớn hơn; nhiều người dùng chúng để canh thời điểm vào lệnh chính xác hơn.
 
 ![Ba lớp khung giờ ICT trong phiên New York: Killzone NY AM chứa Silver Bullet, còn hai khung Macro chồng lên đầu và cuối Silver Bullet](assets/ny/ny-khung-gio.svg)
 
