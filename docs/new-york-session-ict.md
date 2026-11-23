@@ -28,14 +28,61 @@ Trang này tóm tắt các cách giao dịch phổ biến quanh phiên New York 
 
 ## Các phương pháp phổ biến trong phiên New York
 
-| Phương pháp | Cách làm | Ghi chú |
+Bảng dưới so sánh nhanh; từng phương pháp có mục riêng kèm hình minh họa ngay sau.
+
+| Phương pháp | Ý tưởng | Bằng chứng |
 | --- | --- | --- |
-| Opening Range Breakout (ORB) | Đánh dấu đỉnh/đáy 5–30 phút đầu sau 9:30, vào lệnh khi giá phá ra | Nghiên cứu trên QQQ báo lãi; bản chạy lại độc lập thấy lợi thế gần như mất hết khi tính trượt giá (Sharpe 1,06 → 0,23). Xem trang [ORB](opening-range-breakout.md) |
-| Range 8:00–9:30 cho Forex | Range gồm cả nến tin 8:30; chờ nến 15 phút đóng ngoài range trong 9:30–11:30, dừng lỗ ở giữa range, chốt ở 2R (lãi bằng 2 lần khoảng cách từ giá vào tới dừng lỗ) | Bỏ qua ngày có range quá nhỏ hoặc quá lớn so với ATR ngày (biên độ thực trung bình) [1] |
-| Initial Balance (Market Profile) | Lấy range giờ giao dịch đầu tiên (9:30–10:30), theo dõi giá phá ra hay quay lại | Backtest trên NQ/ES gần như hòa vốn trước phí [2] |
-| VWAP / Anchored VWAP | Giá trung bình gia quyền theo khối lượng; giá giữ trên VWAP thì theo xu hướng, cắt mạnh qua thì có thể đảo chiều | Thường dùng làm bối cảnh, không phải tín hiệu độc lập |
+| Opening Range Breakout (ORB) | Vào lệnh khi giá phá range 5–30 phút đầu sau 9:30 | Sharpe 1,06 → 0,23 khi tính trượt giá trên QQQ; xem trang [ORB](opening-range-breakout.md) |
+| Range 8:00–9:30 (Forex) | Chờ nến 15 phút đóng ngoài range rồi vào theo hướng đó | Chưa có backtest độc lập [1] |
+| Initial Balance (Market Profile) | Theo dõi giá phá ra hay quay lại range 9:30–10:30 | Gần hòa vốn trước phí trên NQ/ES [2] |
+| VWAP / Anchored VWAP | Theo xu hướng khi giá giữ trên VWAP; cắt mạnh qua thì có thể đảo chiều | Công cụ bối cảnh, không phải tín hiệu độc lập |
 | Trade theo tin 8:30 | Chờ giá ổn định sau tin rồi theo hướng đã chọn, không đoán trước tin | Spread giãn và trượt giá lớn |
 | London Fix (11:00 NY) | Dòng tiền tái cân bằng danh mục quanh mốc định giá WM/Reuters gây đảo chiều hoặc tăng tốc trên EURUSD/GBPUSD | Xảy ra cuối giai đoạn London và New York cùng mở cửa |
+
+### Range 8:00–9:30 cho Forex
+
+Cách làm [1]:
+
+1. Đánh dấu đỉnh và đáy của range 8:00–9:30 (range gồm cả nến tin 8:30).
+2. Bỏ qua ngày có range quá nhỏ hoặc quá lớn so với ATR ngày (biên độ thực trung bình).
+3. Trong khung 9:30–11:30, chờ một nến 15 phút đóng ngoài range, vào lệnh theo hướng nến đóng.
+4. Dừng lỗ ở giữa range; mục tiêu 2R (lãi bằng 2 lần khoảng cách từ giá vào tới dừng lỗ).
+
+![Setup range 8:00–9:30 trên kiểu EURUSD: nến 15 phút đóng trên range → vào lệnh, dừng lỗ ở giữa range, mục tiêu 2R](assets/ny/ny-range-forex.svg)
+
+*Dữ liệu mô phỏng, không phải kết quả kiểm thử.*
+
+### Initial Balance (Market Profile)
+
+Initial Balance (IB) là range của giờ giao dịch đầu tiên (9:30–10:30). Giá phá ra khỏi IB thường được đọc là ngày có xu hướng theo hướng phá; giá quay lại trong IB là ngày đi ngang. Backtest trên NQ/ES cho thấy gần như hòa vốn trước phí [2].
+
+![Initial Balance 9:30–10:30 và giá phá lên khỏi IB sau đó](assets/ny/ny-initial-balance.svg)
+
+*Dữ liệu mô phỏng, không phải kết quả kiểm thử.*
+
+### VWAP / Anchored VWAP
+
+VWAP là giá trung bình gia quyền theo khối lượng, tính lại từ đầu phiên; Anchored VWAP "neo" mốc tính vào một sự kiện tự chọn (ví dụ giờ mở cửa). Giá giữ trên VWAP thì phe mua đang thắng; giá cắt mạnh xuống qua VWAP thường báo đảo chiều. VWAP thường là công cụ bối cảnh, không phải tín hiệu vào lệnh độc lập.
+
+![Giá giữ trên VWAP rồi cắt mạnh xuống qua VWAP vào cuối buổi sáng](assets/ny/ny-vwap.svg)
+
+*Dữ liệu mô phỏng, không phải kết quả kiểm thử.*
+
+### Trade theo tin 8:30
+
+Lúc 8:30, các tin kinh tế Mỹ khiến giá giãn mạnh cả hai phía trong vài phút đầu: spread nới rộng và lệnh dễ bị trượt giá. Cách thận trọng là chờ giá ổn định (thường 15–30 phút) rồi vào theo hướng đã chọn, thay vì đoán hướng ngay lúc tin ra.
+
+![Tin Mỹ 8:30: nến tin giãn mạnh hai phía, giá ổn định dần rồi chọn hướng](assets/ny/ny-tin-830.svg)
+
+*Dữ liệu mô phỏng, không phải kết quả kiểm thử.*
+
+### London Fix (11:00 NY)
+
+WM/Reuters Fix 16:00 giờ London (thường rơi vào 11:00 New York) là mốc định giá của nhiều hợp đồng ngoại hối. Dòng tiền tái cân bằng danh mục quanh Fix có thể khiến EURUSD/GBPUSD đảo chiều hoặc tăng tốc ở cuối giai đoạn London–New York overlap.
+
+![EURUSD đi lên trước 11:00 rồi đảo chiều xuống quanh London Fix](assets/ny/ny-london-fix.svg)
+
+*Dữ liệu mô phỏng, không phải kết quả kiểm thử.*
 
 ## ICT trong phiên New York
 
@@ -58,6 +105,10 @@ Các nguồn không thống nhất giờ Killzone; xem phần [chi tiết](#gio-
 ### Judas Swing
 
 Quanh giờ mở cửa London hoặc New York 9:30, giá thường chạy sai hướng một đoạn để quét lệnh dừng lỗ (stop) của đám đông, rồi mới đi theo hướng thật của ngày. ICT gọi nhịp này là Judas Swing. Nó thường là bước "quét thanh khoản" đứng trước một setup Silver Bullet.
+
+![Judas Swing: giá quét đáy buổi sáng để hốt stop rồi mới đảo chiều đi lên theo hướng thật](assets/ny/ny-judas-swing.svg)
+
+*Dữ liệu mô phỏng, không phải kết quả kiểm thử.*
 
 ### Silver Bullet: khung 1 giờ có quy tắc vào lệnh
 
