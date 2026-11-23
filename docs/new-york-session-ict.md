@@ -50,7 +50,7 @@ Cách làm [1]:
 
 ![Setup range 8:00–9:30 trên kiểu EURUSD: nến 15 phút đóng trên range → vào lệnh, dừng lỗ ở giữa range, mục tiêu 2R](assets/ny/ny-range-forex.svg)
 
-*Dữ liệu mô phỏng, không phải kết quả kiểm thử.*
+*Dữ liệu mô phỏng, không phải kết quả kiểm thử. Vùng xanh là range 8:00–9:30; nét chấm đỏ là dừng lỗ ở giữa range, nét đứt lam là điểm vào khi nến 15 phút đóng ngoài range, nét đứt xanh lá là mục tiêu 2R.*
 
 ### Initial Balance (Market Profile)
 
@@ -58,7 +58,7 @@ Initial Balance (IB) là range của giờ giao dịch đầu tiên (9:30–10:3
 
 ![Initial Balance 9:30–10:30 và giá phá lên khỏi IB sau đó](assets/ny/ny-initial-balance.svg)
 
-*Dữ liệu mô phỏng, không phải kết quả kiểm thử.*
+*Dữ liệu mô phỏng, không phải kết quả kiểm thử. Vùng xanh là Initial Balance 9:30–10:30; hai nét chấm kéo dài đỉnh và đáy IB; giá phá lên khỏi IB được đọc là ngày có xu hướng.*
 
 ### VWAP / Anchored VWAP
 
@@ -66,7 +66,7 @@ VWAP là giá trung bình gia quyền theo khối lượng, tính lại từ đ�
 
 ![Giá giữ trên VWAP rồi cắt mạnh xuống qua VWAP vào cuối buổi sáng](assets/ny/ny-vwap.svg)
 
-*Dữ liệu mô phỏng, không phải kết quả kiểm thử.*
+*Dữ liệu mô phỏng, không phải kết quả kiểm thử. Đường tím là VWAP tính lại từ đầu phiên; giá giữ trên đường này được đọc là theo xu hướng, nhịp cắt mạnh xuống qua đường này là cảnh báo đảo chiều.*
 
 ### Trade theo tin 8:30
 
@@ -74,7 +74,7 @@ Lúc 8:30, các tin kinh tế Mỹ khiến giá giãn mạnh cả hai phía tron
 
 ![Tin Mỹ 8:30: nến tin giãn mạnh hai phía, giá ổn định dần rồi chọn hướng](assets/ny/ny-tin-830.svg)
 
-*Dữ liệu mô phỏng, không phải kết quả kiểm thử.*
+*Dữ liệu mô phỏng, không phải kết quả kiểm thử. Nến tin 8:30 giãn mạnh cả hai phía so với range trước tin; các nến sau cho thấy giá ổn định dần rồi mới chọn hướng.*
 
 ### London Fix (11:00 NY)
 
@@ -82,7 +82,7 @@ WM/Reuters Fix 16:00 giờ London (thường rơi vào 11:00 New York) là mốc
 
 ![EURUSD đi lên trước 11:00 rồi đảo chiều xuống quanh London Fix](assets/ny/ny-london-fix.svg)
 
-*Dữ liệu mô phỏng, không phải kết quả kiểm thử.*
+*Dữ liệu mô phỏng, không phải kết quả kiểm thử. Vạch đứt tím là mốc London Fix 11:00 New York; giá chạy lên trước Fix rồi đảo chiều xuống.*
 
 ## ICT trong phiên New York
 
@@ -108,7 +108,7 @@ Quanh giờ mở cửa London hoặc New York 9:30, giá thường chạy sai h�
 
 ![Judas Swing: giá quét đáy buổi sáng để hốt stop rồi mới đảo chiều đi lên theo hướng thật](assets/ny/ny-judas-swing.svg)
 
-*Dữ liệu mô phỏng, không phải kết quả kiểm thử.*
+*Dữ liệu mô phỏng, không phải kết quả kiểm thử. Nét đứt là đáy buổi sáng; nhịp xỏ qua đáy quanh giờ mở cửa 9:30 là Judas Swing, trước khi giá đảo chiều đi lên theo hướng thật.*
 
 ### Silver Bullet: khung 1 giờ có quy tắc vào lệnh
 
@@ -131,7 +131,7 @@ Các bước, lấy ví dụ lệnh bán khống:
 
 ![Chiều mua của Silver Bullet: quét đáy gần nhất, displacement đi lên để lại FVG, vào lệnh mua khi giá hồi xuống FVG](assets/ny/ny-silver-bullet-long.svg)
 
-*Dữ liệu mô phỏng, không phải kết quả kiểm thử.*
+*Dữ liệu mô phỏng, không phải kết quả kiểm thử. Ba bước đánh số: quét đáy gần nhất, displacement đi lên để lại FVG (vùng tím), vào lệnh khi giá hồi xuống FVG; nét đứt đỏ là dừng lỗ, nét đứt xanh lá là mục tiêu.*
 
 ### Macro: khung 20–30 phút
 
