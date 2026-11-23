@@ -68,7 +68,7 @@ Các cơ chế sau là ví dụ thực hành [3–6], không phải năm nhánh 
 
 - Chart đơn mã chỉ kiểm tra quy tắc của mã đó; không tái tạo danh mục top 20 RVOL, trần 4× toàn danh mục hay tập mã lịch sử không thiên lệch. Khóa OR/RVOL khi cửa sổ hoàn tất; dùng phiên/múi giờ rõ ràng và lưu volume cùng cửa sổ của 14 phiên trước.
 - Tách marker khỏi giá khớp: lệnh stop có thể khớp ở giá mở nến nếu gap qua mức; nếu stop và target cùng nến, dùng dữ liệu khung thấp/Bar Magnifier khi có hoặc quy tắc bảo thủ. Chốt thoát cuối phiên, kể cả phiên rút ngắn.
-- Với `request.security` lấy ATR ngày, chỉ dùng ATR của nến ngày đã đóng (biểu thức lệch `[1]` nếu dùng `lookahead_on` trên khung cao); không dùng `lookahead_on` với dữ liệu chưa lệch. Khi lấy OR từ khung thấp, dùng `request.security_lower_tf()` thay vì coi một intrabar là toàn bộ vùng.
+- Với `request.security` lấy ATR ngày, chỉ dùng ATR của nến ngày đã đóng (biểu thức lệch `[1]` nếu dùng `lookahead_on` trên khung cao); không dùng `lookahead_on` với dữ liệu chưa lệch. `request.security_lower_tf()` có thể dựng OR từ các nến nhỏ hơn, nhưng strategy mặc định chỉ tính khi nến chart đóng. Trên chart 15 phút, OR 5 phút kết thúc lúc 09:35 nhưng strategy chỉ có thể đặt lệnh lúc 09:45, bỏ lỡ các cú phá trước đó. Muốn đặt lệnh lúc 09:35 trong backtest mặc định, dùng chart có nến đóng tại mốc đó (ví dụ 1 phút).
 
 ## Nguồn
 
