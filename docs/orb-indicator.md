@@ -123,11 +123,7 @@ Tắt giới hạn Classic không cho phép nhiều lệnh cùng lúc. Sau khi t
 
 Bật sau khi đã kiểm tra đúng vùng và entry. Khối lượng tương đối (relative volume, RVOL) so khối lượng OR hôm nay với các phiên trước.
 
-\[
-\mathrm{RVOL} =
-\frac{\text{Khối lượng OR hôm nay}}
-{\text{Khối lượng OR trung bình của N phiên hợp lệ trước}}
-\]
+**RVOL = Khối lượng OR hôm nay ÷ Khối lượng OR trung bình của N phiên hợp lệ trước.**
 
 Mặc định N là 14. Ví dụ 200.000 cổ phiếu hôm nay so với trung bình 100.000 cổ phiếu thì RVOL bằng 2.
 
