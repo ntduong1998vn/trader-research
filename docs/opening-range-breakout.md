@@ -6,13 +6,25 @@ Với ORB, bạn dựa vào mức cao nhất và thấp nhất trong vài phút 
 
 *Dữ liệu mô phỏng, không phải kết quả kiểm thử. Trong hình, giá đóng trên đỉnh vùng. Điểm dừng lỗ là đáy vùng. Mục tiêu +1R nghĩa là lãi bằng số tiền chấp nhận mất nếu giá chạm mức dừng lỗ ban đầu. Giá không chạm cả hai mức nên lệnh được đóng cuối phiên.*
 
+![Ví dụ lệnh bán khống: nến đóng dưới đáy vùng, dừng lỗ ở đỉnh vùng và mục tiêu +1R được chạm](assets/orb/orb-lenh-short.svg)
+
+*Dữ liệu mô phỏng, không phải kết quả kiểm thử. Giá đóng dưới đáy vùng nên xét bán khống. Dừng lỗ là đỉnh vùng. Giá đi xuống chạm mục tiêu +1R nên lệnh được chốt lời.*
+
 ## Vì sao nhìn vào những phút đầu phiên?
 
 Khi sàn mở cửa, lệnh tích tụ qua đêm gặp thông tin mới. Nếu một bên vẫn mua hoặc bán mạnh sau khi vùng đã hình thành, giá có thể đi tiếp theo hướng phá vùng. Nhưng giá cũng có thể chỉ vượt biên trong chốc lát rồi quay lại. Đó là cú phá vỡ giả.
 
 Khối lượng tương đối (RVOL) cho biết phiên này có sôi động hơn thường lệ không. Ví dụ, nếu 5 phút đầu hôm nay giao dịch 200.000 cổ phiếu, so với trung bình 100.000 cổ phiếu trong đúng 5 phút đầu các phiên trước, RVOL là 2. Chỉ số này giúp chọn mã để theo dõi. Nó không cho biết nên mua hay bán.
 
+![Khối lượng 5 phút đầu hôm nay gấp đôi trung bình 14 phiên cùng khung giờ](assets/orb/orb-rvol.svg)
+
+*Dữ liệu mô phỏng, không phải kết quả kiểm thử. Các cột xám là khối lượng 5 phút đầu của 14 phiên trước. Cột lam là hôm nay. Nét đứt đỏ là trung bình 14 phiên. Hôm nay gấp đôi trung bình nên RVOL ≈ 2.*
+
 Vùng ngắn cho tín hiệu sớm nhưng dễ nhiễu. Vùng dài cho thêm thời gian quan sát. Đổi lại, mức dừng lỗ ở biên đối diện có thể xa hơn và giá còn ít thời gian hơn để đi tới mục tiêu trước khi đóng cửa.
+
+![Cùng một chuỗi nến: vùng 5 phút cho tín hiệu sớm hơn vùng 15 phút](assets/orb/orb-vung-ngan-vs-dai.svg)
+
+*Dữ liệu mô phỏng, không phải kết quả kiểm thử. Hai khung dùng chung một chuỗi nến. Vùng 5 phút có tín hiệu ở nến thứ 7. Vùng 15 phút chờ đến nến thứ 17 và biên đối diện xa hơn.*
 
 ## Hai cách vào lệnh
 
@@ -31,6 +43,10 @@ Một ví dụ trong tài liệu đầu vào dùng nến 5 hoặc 15 phút và y
 1. Trước khi xếp hạng, lọc mã theo [giá mở cửa, khối lượng và biên độ dao động](#bo-loc-ma). Trong bản có RVOL, chia khối lượng của vùng hôm nay cho trung bình đúng khung giờ đó trong 14 phiên trước. Không lấy dữ liệu trước giờ mở cửa hoặc đưa hôm nay vào số bình quân. Trong các mã đủ điều kiện, chỉ lấy tối đa 20 mã có RVOL cao nhất trong nhóm đạt từ 1,0.
 2. Nhìn màu của **cả nến mở cửa trên khung đang thử**. Ví dụ, với vùng 5 phút, đó là nến 09:30–09:35, không phải nến 1 phút đầu tiên. Nến xanh: đặt lệnh mua kích hoạt tại đỉnh vùng. Nến đỏ: đặt lệnh bán kích hoạt tại đáy vùng. Giá mở bằng giá đóng (doji): không đặt lệnh.
 3. Đặt dừng lỗ cách **giá khớp** 10% ATR ngày, tính từ 14 phiên đã đóng. ATR là biên độ thực trung bình: ngoài đỉnh và đáy trong phiên, nó còn tính cả khoảng nhảy giá so với giá đóng cửa phiên trước. Không đặt mục tiêu chốt lời. Nếu chưa dừng lỗ, đóng vị thế cuối phiên.
+
+![Ba trường hợp màu nến OR: xanh đặt mua ở đỉnh, đỏ đặt bán ở đáy, doji bỏ qua](assets/orb/orb-mau-nen-or.svg)
+
+*Dữ liệu mô phỏng, không phải kết quả kiểm thử. Nến OR xanh thì đặt lệnh mua chờ ở đỉnh vùng. Nến OR đỏ thì đặt lệnh bán chờ ở đáy vùng. Nến doji thì không đặt lệnh.*
 
 ![Cùng một cú quét râu: lệnh chờ ở biên kích hoạt, còn Classic chưa có tín hiệu](assets/orb/orb-cham-bien-vs-dong-nen.svg)
 
@@ -128,9 +144,28 @@ Lệnh bán khống thắng thường xuyên hơn trong mẫu này. Tuy nhiên, 
 Đây là các ý tưởng từ tài liệu thực hành, không phải kết quả đối chứng của hai nguồn trên.
 
 - **Chờ thử lại biên (ORB Retest).** Đợi giá quay về mép vùng và có nến xác nhận đi tiếp. Có thể đặt dừng lỗ sau nến thử lại. Điểm dừng có thể gần hơn, nhưng bạn sẽ bỏ qua cú chạy không quay lại [4].
+
+  ![Giá phá vùng rồi quay lại chạm đỉnh OR trước khi đi tiếp](assets/orb/orb-retest.svg)
+
+  *Dữ liệu mô phỏng, không phải kết quả kiểm thử. Giá phá vùng nhưng chưa vào. Râu nến thử lại chạm đỉnh OR. Nến xác nhận đóng trên đỉnh là điểm vào. Dừng lỗ đặt dưới đáy nến thử lại.*
+
 - **Lọc theo xu hướng (Trend-Filtered ORB).** Apex dùng đường trung bình lũy thừa (EMA) trên biểu đồ 15 phút. Forex Tester dùng giá trung bình gia quyền theo khối lượng (VWAP) cùng EMA 20 kỳ. Bộ lọc có thể chậm khi giá đảo chiều [4–5].
+
+  ![Hai trường hợp lọc EMA: phá vùng cùng hướng đường trung bình thì vào, ngược hướng thì bỏ qua](assets/orb/orb-loc-xu-huong.svg)
+
+  *Dữ liệu mô phỏng, không phải kết quả kiểm thử. Đường tím là EMA. Bên trái giá phá đỉnh OR khi đang trên EMA tăng nên được vào. Bên phải giá phá đỉnh OR nhưng vẫn dưới EMA giảm nên bỏ qua.*
+
 - **Theo hướng khoảng trống giá (Gap-and-Go ORB).** Chờ nến phá vùng theo hướng khoảng trống qua đêm nếu khoảng trống lớn hơn ATR gần nhất. Nếu giá sớm lấp khoảng trống, giả thuyết đi tiếp yếu đi. Không mặc định giảm vị thế 50% [4].
+
+  ![Khoảng trống qua đêm lớn hơn ATR và cú phá vùng cùng hướng khoảng trống](assets/orb/orb-gap-and-go.svg)
+
+  *Dữ liệu mô phỏng, không phải kết quả kiểm thử. Nét chấm là giá đóng cửa hôm trước. Mũi tên tím là khoảng trống qua đêm 1,1 USD, lớn hơn ATR giả định 0,8 USD. Chỉ xét lệnh phá vùng cùng hướng khoảng trống.*
+
 - **Phá vỡ thất bại (Failed ORB).** Nếu nến đóng trở lại trong vùng, thoát lệnh thuận phá vỡ nếu có. Nếu muốn thử vào ngược hướng về biên kia, coi đó là tín hiệu riêng: giá vẫn có thể quay lại hướng phá vỡ ban đầu [6].
+
+  ![Lệnh mua khi nến đóng ngoài đỉnh rồi thoát khi nến đóng trở lại trong vùng](assets/orb/orb-pha-vo-that-bai.svg)
+
+  *Dữ liệu mô phỏng, không phải kết quả kiểm thử. Lệnh mua vào khi nến đóng trên đỉnh. Nến đóng lại trong vùng là điểm thoát. Nếu vào chiều ngược, đáy vùng là đích chứ không phải tín hiệu.*
 
 ### Thử trên thị trường khác
 
